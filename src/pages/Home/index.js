@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import JustForYou from '../../components/JustForYou';
+import FlashSale from '../../components/FlashSale';
 
 const useStyles = makeStyles((theme) => ({
   items: {
@@ -63,6 +64,11 @@ export default function Home() {
           </Grid>
         </Grid>
         <div>
+          <Typography variant="h5" gutterBottom>
+            Flash Sale
+          </Typography>
+          <FlashSale />
+
           <Typography variant="h5" gutterBottom>
             Just for you
           </Typography>

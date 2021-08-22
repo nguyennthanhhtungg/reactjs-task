@@ -9,9 +9,13 @@ import Button from '@material-ui/core/Button';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Rating from '@material-ui/lab/Rating';
 
+import { numberWithCommas } from '../../utils/currency';
+import Box from '@material-ui/core/Box';
+
 const useStyles = makeStyles({
   root: {
     width: 200,
+    height: 265,
     marginRight: '5px',
     marginBottom: '20px'
   },
@@ -36,17 +40,19 @@ export default function ProductCard({ product }) {
           image={product.imageUrl}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {product.title}
-          </Typography>
-          <Typography variant="h6" className={classes.newPrice} component="p">
-            đ{product.price}
+          <Box component="div" style={{ height: 40 }}>
+            <Typography variant="body2" component="p">
+              {product.title}
+            </Typography>
+          </Box>
+          <Typography variant="subtitle1" className={classes.newPrice} component="p">
+            đ{numberWithCommas(product.price)}
           </Typography>
 
           {product.discount !== '' && (
             <div className={classes.oldPrice}>
               <span style={{ textDecoration: 'line-through' }}>
-                đ{product.price}
+                đ{numberWithCommas(product.price)}
               </span>{' '}
               -{product.discount}%
             </div>

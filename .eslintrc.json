@@ -7,13 +7,15 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings"
     ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 12,
+        "ecmaVersion": 2020,
         "sourceType": "module"
     },
     "plugins": [
@@ -29,5 +31,11 @@
         "prefer-arrow-callback": "off",
         "no-unused-vars": "off",
         "react/no-unescaped-entities": 0
+    },
+    "settings": {
+        "import/resolver": {
+            "babel-module": {
+            }
+        }
     }
 }
