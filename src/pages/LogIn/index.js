@@ -1,10 +1,10 @@
 import React from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-
-import Layout from '../../components/Layout';
 import { Container, Typography } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+
+import Layout from '../../components/Layout';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,17 +15,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
     padding: 30
   },
-  userNameInput: {
+  input: {
     display: 'block',
     padding: 15,
     borderWidth: 1,
-    width: '96%'
-  },
-  passwordInput: {
-    display: 'block',
-    padding: 15,
-    borderWidth: 1,
-    width: '96%'
+    width: '96%',
+    borderColor: 'orange',
+    borderStyle: 'solid',
+    '&:focus': {
+      outline: 'none'
+    }
   },
   loginBtnDIV: {
     display: 'flex',
@@ -50,7 +49,11 @@ const useStyles = makeStyles((theme) => ({
     borderStyle: 'solid',
     borderColor: 'white',
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
+    width: '60%',
+    alignItems: 'center',
+    fontSize: 'larger',
+    color: 'white'
   }
 }));
 
@@ -66,7 +69,7 @@ export default function LogIn() {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    history.push('/verification');
+    history.push('/verification?signupType=phone');
   };
 
   const facebookLoginHandler = () => {
@@ -90,7 +93,7 @@ export default function LogIn() {
             placeholder="Please enter your Phone Number or Email"
             defaultValue=""
             {...register('userNameRequired', { required: true })}
-            className={classes.userNameInput}
+            className={classes.input}
           />
           {errors.userNameRequired && (
             <span style={{ color: 'red' }}>This field is required</span>
@@ -101,7 +104,7 @@ export default function LogIn() {
             type="password"
             placeholder="Please enter your Password"
             {...register('passwordRequired', { required: true })}
-            className={classes.passwordInput}
+            className={classes.input}
           />
           {errors.passwordRequired && (
             <span style={{ color: 'red' }}>This field is required</span>
@@ -119,15 +122,19 @@ export default function LogIn() {
               onClick={facebookLoginHandler}
               type="button"
               className={classes.otherLoginBtn}
+              style={{ backgroundColor: '#4267B2' }}
             >
               <img src="./facebook.png" />
+              Facebook
             </button>
             <button
               onClick={googleLoginHandler}
               type="button"
               className={classes.otherLoginBtn}
+              style={{ backgroundColor: '#db3236' }}
             >
               <img src="./google-plus.png" />
+              Google
             </button>
           </div>
         </form>

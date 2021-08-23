@@ -9,6 +9,8 @@ import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import { useForm } from 'react-hook-form';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import * as queryString from 'query-string';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,21 +36,31 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: 'orange'
     }
   },
-  mobileVerification: {
+  verification: {
     backgroundColor: 'white',
     padding: 30
   },
-  phoneNumberInput: {
+  input: {
     display: 'block',
     padding: 15,
     borderWidth: 1,
-    width: '96%'
+    width: '96%',
+    borderColor: 'orange',
+    borderStyle: 'solid',
+    '&:focus': {
+      outline: 'none'
+    }
   },
-  smsCodeInput: {
+  codeInput: {
     display: 'block',
     padding: 15,
     borderWidth: 1,
-    width: '96%'
+    width: '96%',
+    borderColor: 'orange',
+    borderStyle: 'solid',
+    '&:focus': {
+      outline: 'none'
+    }
   },
   sendBtn: {
     color: 'blue',
@@ -56,22 +68,25 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Verification() {
+export default function Verification(props) {
   const classes = useStyles();
   const history = useHistory();
-  const [isSent, setIsSent] = useState(false);
+  const [flag, setFlag] = useState(false);
   const [timeOut, setTimeOut] = useState(0);
-  const [isDisableResend, setIsDisableResend] = useState(false);
+  const [isDisableSend, setIsDisableSend] = useState(false);
+  const [signupType] = useState(
+    queryString.parse(window.location.search).signupType
+  );
 
   const sendSMSCodeHandler = () => {
-    setIsDisableResend(true);
+    setIsDisableSend(true);
 
     setTimeOut(60);
   };
 
   useEffect(() => {
     if (timeOut === 0) {
-      setIsDisableResend(false);
+      setIsDisableSend(false);
       return;
     }
 
@@ -96,7 +111,7 @@ export default function Verification() {
   return (
     <Layout>
       <Container maxWidth="sm" className={classes.root}>
-        {isSent === false && (
+        {flag === false && (
           <>
             <Typography variant="h5">Security Verification</Typography>
             <div className={classes.securityVerification}>
@@ -112,33 +127,48 @@ export default function Verification() {
               </Typography>
               <Button
                 onClick={() => {
-                  setIsSent(true);
+                  setFlag(true);
                 }}
                 type="button"
                 className={classes.verificationBtn}
               >
                 <PhoneAndroidIcon />
-                Verify through SMS Code
+                {signupType === 'phone'
+                  ? 'Verify through SMS Code'
+                  : 'Verify through Email Code'}
               </Button>
             </div>
           </>
         )}
-        {isSent === true && (
+        {flag === true && (
           <>
-            <Typography variant="h5">Mobile Verification</Typography>
-            <div className={classes.mobileVerification}>
-              <Typography>
-                <PhoneAndroidIcon />
-                We will send a one time SMS code to your Mobile Number
-              </Typography>
+            <Typography variant="h5">
+              {signupType === 'phone' ? 'Mobile Verification' : 'Email Verification'}
+            </Typography>
+            <div className={classes.verification}>
+              {signupType === 'phone' ? (
+                <Typography>
+                  <PhoneAndroidIcon />
+                  We will send a one time SMS code to your Mobile Number
+                </Typography>
+              ) : (
+                <Typography>
+                  <MailOutlineIcon />
+                  We will send a one time Email code to your Email
+                </Typography>
+              )}
 
               <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
                 <input
                   placeholder="Please enter your phone number"
-                  defaultValue="0123456789"
+                  defaultValue={
+                    signupType === 'phone'
+                      ? '0123456789'
+                      : 'tung-thanh.nguyen@capgemini.com'
+                  }
                   readOnly={true}
                   {...register('phoneNumberRequired', { required: true })}
-                  className={classes.phoneNumberInput}
+                  className={classes.input}
                 />
                 {errors.phoneNumberRequired && (
                   <span style={{ color: 'red' }}>This field is required</span>
@@ -146,16 +176,16 @@ export default function Verification() {
                 <br />
                 <input
                   placeholder="6 digits"
-                  {...register('smsCodeRequired', { required: true })}
-                  className={classes.smsCodeInput}
+                  {...register('codeRequired', { required: true })}
+                  className={classes.codeInput}
                 />
-                {errors.smsCodeRequired && (
+                {errors.codeRequired && (
                   <span style={{ color: 'red' }}>This field is required</span>
                 )}
 
                 <Button
                   onClick={sendSMSCodeHandler}
-                  disabled={isDisableResend}
+                  disabled={isDisableSend}
                   className={classes.sendBtn}
                 >
                   Send{timeOut !== 0 ? '(' + timeOut + ')' : ''}
