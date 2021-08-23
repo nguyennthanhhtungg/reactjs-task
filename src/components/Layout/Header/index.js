@@ -2,7 +2,6 @@ import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
-import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import logo from '../../../logo.svg';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,6 +12,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import DirectionsIcon from '@material-ui/icons/Directions';
 import Button from '@material-ui/core/Button';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { useHistory, Link } from 'react-router-dom';
+
+import Menu from '../Menu';
 
 const useStyles = makeStyles((theme) => ({
   navBar: {
@@ -67,6 +69,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
   const classes = useStyles();
+  const history = useHistory();
+
+  const clickLogoHandler = () => {
+    history.push('/');
+  };
 
   return (
     <AppBar color={'white'}>
@@ -83,10 +90,10 @@ export default function Header(props) {
         <Link to="/" className={classes.link}>
           TRACK MY ORDER
         </Link>
-        <Link to="/" className={classes.link}>
+        <Link to="/login" className={classes.link}>
           LOGIN
         </Link>
-        <Link to="/" className={classes.link}>
+        <Link to="/register" className={classes.link}>
           SIGNUP
         </Link>
         <Link to="/" className={classes.link}>
@@ -94,7 +101,12 @@ export default function Header(props) {
         </Link>
       </div>
       <Toolbar className={classes.toolBar}>
-        <img src={logo} alt="logo" className={classes.logo} />
+        <img
+          src={logo}
+          alt="logo"
+          className={classes.logo}
+          onClick={clickLogoHandler}
+        />
         <div className={classes.search_cartDIV}>
           <InputBase
             className={classes.searchInput}
@@ -113,6 +125,7 @@ export default function Header(props) {
           className={classes.advertisementImg}
         />
       </Toolbar>
+      <Menu />
     </AppBar>
   );
 }

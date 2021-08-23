@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
-import SideBar from './SideBar';
-import { heIL } from '@material-ui/core/locale';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: '#d3e9f3',
-    height: '350px'
+    backgroundColor: '#d3e9f3'
   },
   banner: {
     height: '100%',
@@ -85,12 +79,15 @@ export default function Banner(props) {
   }, [banner]);
 
   return (
-    <Grid container className={classes.root}>
-      <Grid item xs={3}>
-        <SideBar />
-      </Grid>
-      <Grid item xs={9}>
+    <Grid container className={classes.root} spacing={1}>
+      <Grid item xs={8}>
         <img src={banner.url} className={classes.banner} />
+      </Grid>
+      <Grid item xs={4}>
+        <img
+          src="https://salt.tikicdn.com/cache/w400/ts/banner/fd/e0/a3/7325b0efc556107dd44d9502294ee1db.png.webp"
+          className={classes.banner}
+        />
       </Grid>
     </Grid>
   );

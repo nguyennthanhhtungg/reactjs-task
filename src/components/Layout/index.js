@@ -63,7 +63,7 @@ export default function Layout(props) {
     <React.Fragment>
       <Header />
       <Toolbar id="back-to-top-anchor" />
-      <Box my={4} style={{ backgroundColor: '#d3e9f3' }}>
+      <Box my={8.5} style={{ backgroundColor: '#d3e9f3' }}>
         {props.children}
       </Box>
       <ScrollTop>

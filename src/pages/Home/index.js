@@ -13,8 +13,7 @@ import FlashSale from '../../components/FlashSale';
 const useStyles = makeStyles((theme) => ({
   items: {
     display: 'flex',
-    justifyContent: 'space-around',
-    marginTop: '15px'
+    justifyContent: 'space-around'
   },
   item: {
     backgroundColor: 'white',
@@ -25,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     '&:hover': {
-      cursor: 'pointer'
+      cursor: 'pointer',
+      backgroundColor: '#a2d2e5'
     }
   }
 }));

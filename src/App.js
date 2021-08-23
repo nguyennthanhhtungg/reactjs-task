@@ -2,9 +2,9 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import Test from './pages/Test';
-import { Helmet } from 'react-helmet';
-import Layout from './components/Layout';
+import SignUp from './pages/SignUp';
+import LogIn from './pages/LogIn';
+import Verification from './pages/Verification';
 
 function App() {
   return (
@@ -14,8 +14,14 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/test">
-            <Test />
+          <Route exact path="/register">
+            <SignUp />
+          </Route>
+          <Route exact path="/login">
+            <LogIn />
+          </Route>
+          <Route exact path="/verification">
+            <Verification />
           </Route>
         </Switch>
       </div>
