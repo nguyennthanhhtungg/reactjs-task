@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Rating from '@material-ui/lab/Rating';
+import Box from '@material-ui/core/Box';
 
 import { numberWithCommas } from '../../utils/currency';
-import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles({
   root: {
@@ -57,13 +55,7 @@ export default function ProductCard({ product }) {
               -{product.discount}%
             </div>
           )}
-          <Rating
-            name="half-rating-read"
-            defaultValue={2.5}
-            precision={0.5}
-            size="small"
-            readOnly
-          />
+          <Rating defaultValue={2.5} precision={0.5} size="small" readOnly />
         </CardContent>
       </CardActionArea>
     </Card>

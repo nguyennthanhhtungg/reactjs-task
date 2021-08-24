@@ -1,12 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import FormLabel from '@material-ui/core/FormLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import Radio from '@material-ui/core/Radio';
-import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 
@@ -104,11 +98,11 @@ export default function Footer(props) {
         <Typography variant="subtitle1" className={classes.subtitle} gutterBottom>
           Payment Methods
         </Typography>
-        <img src="./visa.svg" alt="visa" className={classes.paymentMethodLogo} />
-        <img src="./paypal.png" alt="paypal" className={classes.paymentMethodLogo} />
-        <img src="./jcb.png" alt="jcb" className={classes.paymentMethodLogo} />
+        <img src="/visa.svg" alt="visa" className={classes.paymentMethodLogo} />
+        <img src="/paypal.png" alt="paypal" className={classes.paymentMethodLogo} />
+        <img src="/jcb.png" alt="jcb" className={classes.paymentMethodLogo} />
         <img
-          src="./mastercard.svg"
+          src="/mastercard.svg"
           alt="mastercard"
           className={classes.paymentMethodLogo}
         />
@@ -126,9 +120,9 @@ export default function Footer(props) {
         <Typography variant="subtitle1" className={classes.subtitle} gutterBottom>
           Download My App
         </Typography>
-        <img src="./app-store-logo.svg" />
+        <img src="/app-store-logo.svg" />
         <img
-          src="./google-play-logo.png"
+          src="/google-play-logo.png"
           className={classes.download}
           style={{ height: '120px' }}
         />

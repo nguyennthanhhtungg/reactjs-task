@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ProductCard from '../ProductCard';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Box } from '@material-ui/core';

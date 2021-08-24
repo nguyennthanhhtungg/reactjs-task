@@ -1,15 +1,17 @@
 import React from 'react';
-import ProductCard from '../ProductCard';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { Box } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+
+import Carousel from '../Carousel';
+import ProductCard from '../ProductCard';
 
 const useStyles = makeStyles((theme) => ({
-  productDIV: {
-    display: 'flex'
+  root: {
+    marginTop: 30
   }
 }));
 
-const productData = [
+const similarProductData = [
   {
     id: 1,
     imageUrl:
@@ -211,14 +213,19 @@ const productData = [
   }
 ];
 
-export default function JustForYou(props) {
+export default function SimilarProductList() {
   const classes = useStyles();
 
   return (
-    <Box flexWrap="wrap" className={classes.productDIV}>
-      {productData.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </Box>
+    <div className={classes.root}>
+      <Typography variant="h5" gutterBottom>
+        Products related to this item
+      </Typography>
+      <Carousel show={6}>
+        {similarProductData.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </Carousel>
+    </div>
   );
 }

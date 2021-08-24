@@ -1,10 +1,8 @@
 import React from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { Link } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 
 import SubMenu from './SubMenu';
-import Popover from '@material-ui/core/Popover';
 
 const useStyles = makeStyles((theme) => ({
   root: {

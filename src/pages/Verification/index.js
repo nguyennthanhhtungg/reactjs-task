@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-
-import Layout from '../../components/Layout';
 import { Container, Typography } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import { useForm } from 'react-hook-form';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import * as queryString from 'query-string';
+
+import Layout from '../../components/Layout';
 
 const useStyles = makeStyles((theme) => ({
   root: {

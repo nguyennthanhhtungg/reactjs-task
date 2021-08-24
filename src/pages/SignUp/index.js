@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-
-import Layout from '../../components/Layout';
 import { Container, Typography } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+
+import Layout from '../../components/Layout';
 
 const useStyles = makeStyles((theme) => ({
   root: {
