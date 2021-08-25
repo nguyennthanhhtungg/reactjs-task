@@ -1,6 +1,6 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: 'https://localhost:44307/api',
+  baseURL: 'https://shoponlinetask.herokuapp.com/api',
   timeout: 5000
 });
