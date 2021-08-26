@@ -8,6 +8,7 @@ import JustForYou from '../../components/JustForYou';
 import FlashSale from '../../components/FlashSale';
 import Layout from '../../components/Layout';
 import Banner from '../../components/Banner';
+import TopBestSellingProductList from '../../components/TopBestSellingProductList';
 
 const useStyles = makeStyles((theme) => ({
   items: {
@@ -63,14 +64,8 @@ export default function Home() {
           </Grid>
         </Grid>
         <div>
-          <Typography variant="h5" gutterBottom>
-            Flash Sale
-          </Typography>
+          <TopBestSellingProductList />
           <FlashSale />
-
-          <Typography variant="h5" gutterBottom>
-            Just for you
-          </Typography>
           <JustForYou />
         </div>
       </Container>

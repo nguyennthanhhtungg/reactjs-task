@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Product({ props }) {
-  const initialAppState = {
+  const initialProductState = {
     productId: 0,
     productName: '',
     shortDescription: '',
@@ -63,7 +63,7 @@ export default function Product({ props }) {
 
   const classes = useStyles();
   const history = useHistory();
-  const [store, dispatch] = useReducer(reducer, initialAppState);
+  const [store, dispatch] = useReducer(reducer, initialProductState);
 
   const { id } = useParams();
 

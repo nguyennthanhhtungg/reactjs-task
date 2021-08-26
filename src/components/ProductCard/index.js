@@ -31,20 +31,30 @@ export default function ProductCard({ product }) {
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="image"
-          height="140"
-          image={product.imageUrl}
-        />
+        {product.imageUrl !== undefined ? (
+          <CardMedia
+            component="img"
+            alt="image"
+            height="140"
+            image={product.imageUrl}
+          />
+        ) : (
+          <img
+            style={{ height: 140 }}
+            alt={product.imageName}
+            src={
+              'data:' + product.imageType + ';base64,' + product.encodedBase64Image
+            }
+          />
+        )}
         <CardContent>
           <Box component="div" style={{ height: 40 }}>
             <Typography variant="body2" component="p">
-              {product.title}
+              {product.productName}
             </Typography>
           </Box>
           <Typography variant="subtitle1" className={classes.newPrice} component="p">
-            đ{numberWithCommas(product.price)}
+            đ{numberWithCommas(product.price * ((100 - product.discount) / 100))}
           </Typography>
 
           {product.discount !== '' && (
