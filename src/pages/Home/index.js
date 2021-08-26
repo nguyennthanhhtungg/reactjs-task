@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import JustForYou from '../../components/JustForYou';
@@ -9,6 +8,7 @@ import FlashSale from '../../components/FlashSale';
 import Layout from '../../components/Layout';
 import Banner from '../../components/Banner';
 import TopBestSellingProductList from '../../components/TopBestSellingProductList';
+import TopMostInterestedProductList from '../../components/TopMostInterestedProductList';
 
 const useStyles = makeStyles((theme) => ({
   items: {
@@ -65,6 +65,7 @@ export default function Home() {
         </Grid>
         <div>
           <TopBestSellingProductList />
+          <TopMostInterestedProductList />
           <FlashSale />
           <JustForYou />
         </div>

@@ -73,7 +73,6 @@ export default function Product({ props }) {
         `/Products/ProductWithCategoryAndSuppilerById?id=${id}`
       );
 
-      console.log(res);
       if (res.status !== 200) {
         history.push('/');
       } else {
@@ -83,7 +82,16 @@ export default function Product({ props }) {
         });
       }
     }
+
     loadProduct();
+
+    async function IncreaseHitCounterBy1Unit() {
+      await axiosInstance.get(
+        `/Products/IncreaseHitCounterBy1UnitByProductId?productId=${id}`
+      );
+    }
+
+    IncreaseHitCounterBy1Unit();
   }, []);
 
   return (

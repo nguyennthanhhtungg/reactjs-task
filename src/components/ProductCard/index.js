@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
+import { useHistory } from 'react-router-dom';
 
 import { numberWithCommas } from '../../utils/currency';
 
@@ -27,9 +28,14 @@ const useStyles = makeStyles({
 
 export default function ProductCard({ product }) {
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleRedirectToProductDetailPage = () => {
+    history.push(`/product/${product.productId}`);
+  };
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} onClick={handleRedirectToProductDetailPage}>
       <CardActionArea>
         {product.imageUrl !== undefined ? (
           <CardMedia

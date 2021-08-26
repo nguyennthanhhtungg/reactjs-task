@@ -40,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
     marginRight: 10
   },
-  quantity: {},
   quantityInput: {
     padding: 6.3,
     width: 35,
@@ -98,19 +97,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const imageListData = [
-  'https://salt.tikicdn.com/cache/100x100/ts/product/6c/75/dc/d6563ffac90a7a8ce1e0877580d6b267.jpg.webp',
-  'https://salt.tikicdn.com/cache/100x100/ts/product/6c/75/dc/d6563ffac90a7a8ce1e0877580d6b267.jpg.webp',
-  'https://salt.tikicdn.com/cache/100x100/ts/product/6c/75/dc/d6563ffac90a7a8ce1e0877580d6b267.jpg.webp',
-  'https://salt.tikicdn.com/cache/100x100/ts/product/6c/75/dc/d6563ffac90a7a8ce1e0877580d6b267.jpg.webp',
-  'https://salt.tikicdn.com/cache/100x100/ts/product/6c/75/dc/d6563ffac90a7a8ce1e0877580d6b267.jpg.webp',
-  'https://salt.tikicdn.com/cache/100x100/ts/product/6c/75/dc/d6563ffac90a7a8ce1e0877580d6b267.jpg.webp',
-  'https://salt.tikicdn.com/cache/100x100/ts/product/6c/75/dc/d6563ffac90a7a8ce1e0877580d6b267.jpg.webp',
-  'https://salt.tikicdn.com/cache/100x100/ts/product/6c/75/dc/d6563ffac90a7a8ce1e0877580d6b267.jpg.webp',
-  'https://salt.tikicdn.com/cache/100x100/ts/product/6c/75/dc/d6563ffac90a7a8ce1e0877580d6b267.jpg.webp',
-  'https://salt.tikicdn.com/cache/100x100/ts/product/6c/75/dc/d6563ffac90a7a8ce1e0877580d6b267.jpg.webp'
+  'https://via.placeholder.com/150',
+  'https://via.placeholder.com/150',
+  'https://via.placeholder.com/150',
+  'https://via.placeholder.com/150',
+  'https://via.placeholder.com/150',
+  'https://via.placeholder.com/150',
+  'https://via.placeholder.com/150',
+  'https://via.placeholder.com/150',
+  'https://via.placeholder.com/150',
+  'https://via.placeholder.com/150'
 ];
 
-export default function ProductDetail() {
+export default function ProductDetail({ product }) {
   const classes = useStyles();
   const [quantity, setQuantity] = useState(1);
   const { store } = useContext(ProductContext);
@@ -162,13 +161,13 @@ export default function ProductDetail() {
         </div>
         <div className={classes.priceDIV}>
           <Typography variant="h4" component="p" className={classes.newPrice}>
-            {numberWithCommas(store.price * (1 - store.discount))}đ
+            {numberWithCommas(store.price * ((100 - store.discount) / 100))}đ
           </Typography>
           <div>
             <Typography component="p" className={classes.oldPrice}>
               {numberWithCommas(store.price)}đ
             </Typography>
-            <span style={{ textDecoration: 'none' }}>-{store.discount * 100}%</span>
+            <span style={{ textDecoration: 'none' }}>-{store.discount}%</span>
           </div>
         </div>
         <div>

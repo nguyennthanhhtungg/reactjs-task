@@ -33,6 +33,13 @@ export default function SmallThumbnailImage({
         borderColor: currentImageIndex === id ? 'orange' : 'gray'
       }}
     >
+      {/*<img*/}
+      {/*  style={{ height: 140 }}*/}
+      {/*  alt={product.imageName}*/}
+      {/*  src={*/}
+      {/*    'data:' + product.imageType + ';base64,' + product.encodedBase64Image*/}
+      {/*  }*/}
+      {/*/>*/}
       <img
         style={{ width: '100%', height: '100%' }}
         src={image}
