@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 
 const productData = [
   {
-    id: 1,
+    productId: 1,
     imageUrl:
       'https://vn-test-11.slatic.net/p/465faefd5955de03d88e0613da9907f9.jpg_200x200Q100.jpg_.webp',
     productName: 'Nước Tẩy Trang Dành Cho Da Đầu',
@@ -22,7 +22,7 @@ const productData = [
     numberOfFeedback: 5
   },
   {
-    id: 2,
+    productId: 2,
     imageUrl:
       'https://vn-test-11.slatic.net/p/b55311acf73755f50a54503a8c463649.jpg_200x200Q100.jpg_.webp',
     productName: 'Product 2',
@@ -32,7 +32,7 @@ const productData = [
     numberOfFeedback: 5
   },
   {
-    id: 3,
+    productId: 3,
     imageUrl:
       'https://vn-test-11.slatic.net/p/7fe128c57d59b4bf86c1a06c606a49da.jpg_200x200Q100.jpg_.webp',
     productName: 'Product 3',
@@ -42,7 +42,7 @@ const productData = [
     numberOfFeedback: 5
   },
   {
-    id: 4,
+    productId: 4,
     imageUrl:
       'https://vn-test-11.slatic.net/p/1369fbe7d43895ca2bd88b79a3512baa.jpg_200x200Q100.jpg_.webp',
     productName: 'Product 4',
@@ -52,7 +52,7 @@ const productData = [
     numberOfFeedback: 5
   },
   {
-    id: 5,
+    productId: 5,
     imageUrl:
       'https://vn-test-11.slatic.net/p/b2ae3e9b2196fb78c3a6adac5e068655.jpg_200x200Q100.jpg_.webp',
     productName: 'Product 5',
@@ -62,7 +62,7 @@ const productData = [
     numberOfFeedback: 5
   },
   {
-    id: 6,
+    productId: 6,
     imageUrl:
       'https://vn-test-11.slatic.net/p/aa988851ce08859414cff26f097a5354.jpg_200x200Q100.jpg_.webp',
     productName: 'Product 6',
@@ -83,7 +83,7 @@ export default function FlashSale(props) {
       </Typography>
       <Box flexWrap="wrap" className={classes.productDIV}>
         {productData.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.productId} product={product} />
         ))}
       </Box>
     </>
