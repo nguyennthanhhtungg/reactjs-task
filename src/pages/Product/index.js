@@ -76,7 +76,6 @@ export default function Product({ props }) {
   const [store, dispatch] = useReducer(reducer, initialProductState);
 
   const { id } = useParams();
-
   useEffect(() => {
     async function loadInit() {
       const productRes = await axiosInstance.get(
@@ -107,7 +106,7 @@ export default function Product({ props }) {
       );
     }
     increaseHitCounterBy1Unit();
-  }, []);
+  }, [id]);
 
   const handleClickBack = () => {
     history.push('/');
