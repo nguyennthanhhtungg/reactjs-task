@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import { useHistory } from 'react-router-dom';
 
 import { numberWithCommas } from '../../utils/currency';
+import { shorten } from '../../utils/formatText';
 
 const useStyles = makeStyles({
   root: {
@@ -37,7 +38,7 @@ export default function ProductCard({ product }) {
   return (
     <Card className={classes.root} onClick={handleRedirectToProductDetailPage}>
       <CardActionArea>
-        {product.imageUrl !== undefined ? (
+        {product.imageUrl !== '' ? (
           <CardMedia
             component="img"
             alt="image"
@@ -56,7 +57,7 @@ export default function ProductCard({ product }) {
         <CardContent>
           <Box component="div" style={{ height: 40 }}>
             <Typography variant="body2" component="p">
-              {product.productName}
+              {shorten(product.productName, 40)}
             </Typography>
           </Box>
           <Typography variant="subtitle1" className={classes.newPrice} component="p">

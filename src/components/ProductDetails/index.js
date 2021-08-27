@@ -25,7 +25,7 @@ export default function ProductDetails(props) {
       <Typography variant="h5" gutterBottom>
         Product Details
       </Typography>
-      <div className={classes.details}>{parse(store.detailDescription)}</div>
+      <div className={classes.details}>{parse(store.product.detailDescription)}</div>
     </div>
   );
 }

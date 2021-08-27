@@ -146,10 +146,10 @@ export default function ProductDetail({ product }) {
         <Typography variant="subtitle2">
           Brand:{' '}
           <Link to="/" className={classes.link}>
-            {store.supplier.supplierName}
+            {store.product.supplier.supplierName}
           </Link>
         </Typography>
-        <Typography variant="h6">{store.productName}</Typography>
+        <Typography variant="h6">{store.product.productName}</Typography>
         <div className={classes.rating}>
           <Rating defaultValue={2.5} precision={0.5} readOnly size="small" />
           <Typography
@@ -161,13 +161,18 @@ export default function ProductDetail({ product }) {
         </div>
         <div className={classes.priceDIV}>
           <Typography variant="h4" component="p" className={classes.newPrice}>
-            {numberWithCommas(store.price * ((100 - store.discount) / 100))}đ
+            {numberWithCommas(
+              store.product.price * ((100 - store.product.discount) / 100)
+            )}
+            đ
           </Typography>
           <div>
             <Typography component="p" className={classes.oldPrice}>
-              {numberWithCommas(store.price)}đ
+              {numberWithCommas(store.product.price)}đ
             </Typography>
-            <span style={{ textDecoration: 'none' }}>-{store.discount}%</span>
+            <span style={{ textDecoration: 'none' }}>
+              -{store.product.discount}%
+            </span>
           </div>
         </div>
         <div>

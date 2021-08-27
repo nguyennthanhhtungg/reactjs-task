@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-import JustForYou from '../../components/JustForYou';
-import FlashSale from '../../components/FlashSale';
+import ProductListGroupCategory from '../../components/ProductListGroupCategory';
 import Layout from '../../components/Layout';
 import Banner from '../../components/Banner';
 import TopBestSellingProductList from '../../components/TopBestSellingProductList';
 import TopMostInterestedProductList from '../../components/TopMostInterestedProductList';
+import HomeContext from './homeContext';
+import reducer from './homeReducer';
+import { axiosInstance } from '../../utils/database';
 
 const useStyles = makeStyles((theme) => ({
   items: {
@@ -30,8 +32,33 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const initialHomeState = {
+  categoryList: []
+};
+
 export default function Home() {
   const classes = useStyles();
+
+  const [store, dispatch] = useReducer(reducer, initialHomeState);
+
+  useEffect(() => {
+    async function loadCategoryList() {
+      const categoryListRes = await axiosInstance.get(`/Categories`);
+
+      if (categoryListRes.status !== 200) {
+        alert('Error happened!');
+      } else {
+        dispatch({
+          type: 'init',
+          payload: {
+            categoryList: categoryListRes.data
+          }
+        });
+      }
+    }
+
+    loadCategoryList();
+  }, []);
 
   return (
     <Layout>
@@ -66,8 +93,20 @@ export default function Home() {
         <div>
           <TopBestSellingProductList />
           <TopMostInterestedProductList />
-          <FlashSale />
-          <JustForYou />
+          <HomeContext.Provider value={{ store, dispatch }}>
+            {store.categoryList.map((category) => {
+              if (category.active === true) {
+                return (
+                  <ProductListGroupCategory
+                    key={category.categoryId}
+                    category={category}
+                  />
+                );
+              } else {
+                return;
+              }
+            })}
+          </HomeContext.Provider>
         </div>
       </Container>
     </Layout>

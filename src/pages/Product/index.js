@@ -4,6 +4,7 @@ import { Container, Typography } from '@material-ui/core';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import Button from '@material-ui/core/Button';
 
 import Layout from '../../components/Layout';
 import GeneralProductInformation from '../../components/GeneralProductInformation';
@@ -20,16 +21,22 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 20
   },
   breadcrumbs: {
-    paddingTop: 10,
-    paddingBottom: 10
+    marginRight: 'auto'
   },
   link: {
     textDecoration: 'none'
+  },
+  backBtn: {
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: 'orange',
+    backgroundColor: 'white',
+    color: 'orange'
   }
 }));
 
-export default function Product({ props }) {
-  const initialProductState = {
+const initialProductState = {
+  product: {
     productId: 0,
     productName: '',
     shortDescription: '',
@@ -59,8 +66,11 @@ export default function Product({ props }) {
     },
     tax: 0,
     image: {}
-  };
+  },
+  similarProductList: []
+};
 
+export default function Product({ props }) {
   const classes = useStyles();
   const history = useHistory();
   const [store, dispatch] = useReducer(reducer, initialProductState);
@@ -68,49 +78,78 @@ export default function Product({ props }) {
   const { id } = useParams();
 
   useEffect(() => {
-    async function loadProduct() {
-      const res = await axiosInstance.get(
+    async function loadInit() {
+      const productRes = await axiosInstance.get(
         `/Products/ProductWithCategoryAndSuppilerById?id=${id}`
       );
 
-      if (res.status !== 200) {
+      if (productRes.status !== 200) {
         history.push('/');
       } else {
+        const similarProductListRes = await axiosInstance.get(
+          `/Products/ProductListByCategoryId?categoryId=${productRes.data.categoryId}`
+        );
+
         dispatch({
           type: 'init',
-          payload: res.data
+          payload: {
+            product: productRes.data,
+            similarProductList: similarProductListRes.data
+          }
         });
       }
     }
+    loadInit();
 
-    loadProduct();
-
-    async function IncreaseHitCounterBy1Unit() {
+    async function increaseHitCounterBy1Unit() {
       await axiosInstance.get(
         `/Products/IncreaseHitCounterBy1UnitByProductId?productId=${id}`
       );
     }
-
-    IncreaseHitCounterBy1Unit();
+    increaseHitCounterBy1Unit();
   }, []);
+
+  const handleClickBack = () => {
+    history.push('/');
+  };
 
   return (
     <Layout>
       <ProductContext.Provider value={{ store, dispatch }}>
         <Container className={classes.root}>
-          <Breadcrumbs
-            className={classes.breadcrumbs}
-            separator={<NavigateNextIcon />}
-            aria-label="breadcrumb"
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              paddingTop: 10,
+              paddingBottom: 10
+            }}
           >
-            <Link to="/" className={classes.link}>
-              {store.category.categoryName}
-            </Link>
-            <Link to="/" className={classes.link}>
-              SubMenu
-            </Link>
-            <Typography color="textPrimary">{store.productName}</Typography>
-          </Breadcrumbs>
+            <Breadcrumbs
+              className={classes.breadcrumbs}
+              separator={<NavigateNextIcon />}
+              aria-label="breadcrumb"
+            >
+              <Link to="/" className={classes.link}>
+                {store.product.category.categoryName}
+              </Link>
+              <Link to="/" className={classes.link}>
+                SubMenu
+              </Link>
+              <Typography color="textPrimary">
+                {store.product.productName}
+              </Typography>
+            </Breadcrumbs>
+            <Button
+              onClick={handleClickBack}
+              variant="outlined"
+              className={classes.backBtn}
+              size="small"
+            >
+              BACK
+              <NavigateNextIcon />
+            </Button>
+          </div>
           <GeneralProductInformation />
           <SimilarProductList />
           <ProductDesctiption />

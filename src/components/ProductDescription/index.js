@@ -25,7 +25,9 @@ export default function ProductDesctiption(props) {
       <Typography variant="h5" gutterBottom>
         Product Description
       </Typography>
-      <div className={classes.description}>{parse(store.shortDescription)}</div>
+      <div className={classes.description}>
+        {parse(store.product.shortDescription)}
+      </div>
     </div>
   );
 }

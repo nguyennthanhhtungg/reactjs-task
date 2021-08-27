@@ -6,11 +6,12 @@ import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import Verification from './pages/Verification';
 import Product from './pages/Product';
+import ScrollToTop from './ScrollToTop';
 
 function App() {
   return (
     <Router>
-      <div>
+      <ScrollToTop>
         <Switch>
           <Route exact path="/">
             <Home />
@@ -28,7 +29,7 @@ function App() {
             <Product />
           </Route>
         </Switch>
-      </div>
+      </ScrollToTop>
     </Router>
   );
 }
