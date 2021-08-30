@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -8,12 +8,11 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import { useHistory } from 'react-router-dom';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 import { numberWithCommas } from '../../utils/currency';
 import { shorten } from '../../utils/formatText';
 import Grid from '@material-ui/core/Grid';
-import { Stars } from '@material-ui/icons';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -44,6 +43,15 @@ const useStyles = makeStyles({
     height: 0,
     borderTop: '15px solid orange',
     borderLeft: '20px solid transparent'
+  },
+  buyNowBtn: {
+    position: 'absolute',
+    top: '90px',
+    right: '5px',
+    color: 'orange',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    fontSize: 'smaller'
   }
 });
 
@@ -76,30 +84,36 @@ export default function ProductCard({ product, promotionBadge }) {
         )}
         <Grid container style={{ position: 'relative' }}>
           {promotionBadge === true && (
-            <div style={{ position: 'absolute', bottom: '85px', right: '0px' }}>
-              <div className={classes.square}>
-                <Typography
-                  style={{ fontWeight: 'bolder', color: 'red', textAlign: 'center' }}
-                  variant="subtitle2"
-                >
-                  {product.discount}%
-                </Typography>
-                <Typography
-                  style={{ color: 'white', textAlign: 'center' }}
-                  variant="subtitle2"
-                >
-                  OFF
-                </Typography>
+            <>
+              <div style={{ position: 'absolute', bottom: '85px', right: '0px' }}>
+                <div className={classes.square}>
+                  <Typography
+                    style={{
+                      fontWeight: 'bolder',
+                      color: 'red',
+                      textAlign: 'center'
+                    }}
+                    variant="subtitle2"
+                  >
+                    {product.discount}%
+                  </Typography>
+                  <Typography
+                    style={{ color: 'white', textAlign: 'center' }}
+                    variant="subtitle2"
+                  >
+                    OFF
+                  </Typography>
+                </div>
+                <div style={{ display: 'flex' }}>
+                  <div className={classes.triangleTopLeft}></div>
+                  <div className={classes.triangleTopRight}></div>
+                </div>
               </div>
-              <div style={{ display: 'flex' }}>
-                <div className={classes.triangleTopLeft}></div>
-                <div className={classes.triangleTopRight}></div>
-              </div>
-            </div>
+              <Button size="small" className={classes.buyNowBtn}>
+                BUY NOW
+              </Button>
+            </>
           )}
-          <FavoriteBorderIcon
-            style={{ position: 'absolute', top: '85px', right: '10px' }}
-          />
         </Grid>
         <CardContent>
           <Box component="div" style={{ height: 40 }}>
