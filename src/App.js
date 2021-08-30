@@ -7,6 +7,7 @@ import LogIn from './pages/LogIn';
 import Verification from './pages/Verification';
 import Product from './pages/Product';
 import ScrollToTop from './ScrollToTop';
+import Promotion from './pages/Promotion';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route exact path="/product/:id">
             <Product />
+          </Route>
+          <Route exact path="/promotion">
+            <Promotion />
           </Route>
         </Switch>
       </ScrollToTop>

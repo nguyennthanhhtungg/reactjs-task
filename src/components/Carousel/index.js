@@ -5,10 +5,24 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import './carousel.css';
 
 const Carousel = (props) => {
-  const { children, show } = props;
+  const { children, show, auto } = props;
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [length, setLength] = useState(children.length);
+
+  useEffect(() => {
+    if (auto === true) {
+      const timeout = window.setTimeout(() => {
+        if (currentIndex < length - show) {
+          setCurrentIndex((prevState) => prevState + 1);
+        } else {
+          setCurrentIndex(0);
+        }
+      }, 3000);
+
+      return () => window.clearTimeout(timeout);
+    }
+  }, [currentIndex]);
 
   // Set the length to match current children from props
   useEffect(() => {

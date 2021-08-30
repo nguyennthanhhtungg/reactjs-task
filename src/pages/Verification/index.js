@@ -9,6 +9,8 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import * as queryString from 'query-string';
 
 import Layout from '../../components/Layout';
+import Helmet from 'react-helmet';
+import ProductContext from '../Product/productContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,6 +110,10 @@ export default function Verification(props) {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Verification | React App</title>
+      </Helmet>
+
       <Container maxWidth="sm" className={classes.root}>
         {flag === false && (
           <>

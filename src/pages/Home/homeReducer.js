@@ -3,7 +3,27 @@ export default function reducer(state, action) {
   switch (action.type) {
     case 'init':
       return {
-        categoryList: action.payload.categoryList
+        ...state,
+        categoryList: action.payload.categoryList,
+        topBestSellingProductList: action.payload.topBestSellingProductList,
+        topMostInterestedProductList: action.payload.topMostInterestedProductList,
+        topFlashSaleProductList: action.payload.topFlashSaleProductList
+      };
+
+    case 'changeTopBestSellingCurrentCategoryId':
+      return {
+        ...state,
+        topBestSellingProductList: action.payload.topBestSellingProductList,
+        topBestSellingCurrentCategoryId:
+          action.payload.topBestSellingCurrentCategoryId
+      };
+
+    case 'changeTopMostInterestedCurrentCategoryId':
+      return {
+        ...state,
+        topMostInterestedProductList: action.payload.topMostInterestedProductList,
+        topMostInterestedCurrentCategoryId:
+          action.payload.topMostInterestedCurrentCategoryId
       };
 
     default:

@@ -22,7 +22,7 @@ export default function SimilarProductList() {
       <Typography variant="h5" gutterBottom>
         Products related to this item
       </Typography>
-      <Carousel show={6}>
+      <Carousel show={6} auto={false}>
         {store.similarProductList.map((product) => (
           <ProductCard key={product.productId} product={product} />
         ))}

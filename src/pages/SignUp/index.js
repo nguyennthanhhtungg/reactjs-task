@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
 import Layout from '../../components/Layout';
+import Helmet from 'react-helmet';
+import ProductContext from '../Product/productContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -85,6 +87,9 @@ export default function SignUp() {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Sign Up | React App</title>
+      </Helmet>
       <Container maxWidth="sm" className={classes.root}>
         <Typography variant="h5">Welcome to ReactJs! Please login.</Typography>
 

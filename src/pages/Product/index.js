@@ -15,6 +15,7 @@ import YourBrowsingHistory from '../../components/YourBrowsingHistory';
 import { axiosInstance } from '../../utils/database';
 import ProductContext from './productContext';
 import reducer from './productReducer';
+import Helmet from 'react-helmet';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -115,6 +116,9 @@ export default function Product({ props }) {
   return (
     <Layout>
       <ProductContext.Provider value={{ store, dispatch }}>
+        <Helmet>
+          <title>{store.product.productName} | React App</title>
+        </Helmet>
         <Container className={classes.root}>
           <div
             style={{

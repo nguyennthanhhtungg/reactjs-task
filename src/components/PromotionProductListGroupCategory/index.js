@@ -11,23 +11,25 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ProductListGroupCategory({ category }) {
+export default function PromotionProductListGroupCategory({ category }) {
   const classes = useStyles();
-  const [productList, setProductList] = useState([]);
+  const [promotionProductList, setPromotionProductList] = useState([]);
 
   useEffect(() => {
-    async function LoadProductListByCategoryId() {
-      const productListRes = await axiosInstance.get(
-        `/Products/ProductListByCategoryId?n=${12}&categoryId=${category.categoryId}`
+    async function LoadPromotionProductListByCategoryId() {
+      const promotionProductListRes = await axiosInstance.get(
+        `/Products/TopPromotionProductListByCategoryId?n=${6}&categoryId=${
+          category.categoryId
+        }`
       );
 
-      if (productListRes.status !== 200) {
+      if (promotionProductListRes.status !== 200) {
         console.log('Error happened!');
       } else {
-        setProductList(productListRes.data);
+        setPromotionProductList(promotionProductListRes.data);
       }
     }
-    LoadProductListByCategoryId();
+    LoadPromotionProductListByCategoryId();
   }, [category]);
 
   return (
@@ -36,7 +38,7 @@ export default function ProductListGroupCategory({ category }) {
         {category.categoryName}
       </Typography>
       <Box flexWrap="wrap" className={classes.productDIV}>
-        {productList.map((product) => (
+        {promotionProductList.map((product) => (
           <ProductCard key={product.productId} product={product} />
         ))}
       </Box>
