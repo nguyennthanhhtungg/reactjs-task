@@ -24,7 +24,11 @@ export default function FlashSale(props) {
       </Typography>
       <Box flexWrap="wrap" className={classes.productDIV}>
         {store.topFlashSaleProductList.map((product) => (
-          <ProductCard key={product.productId} product={product} />
+          <ProductCard
+            key={product.productId}
+            product={product}
+            promotionBadge={true}
+          />
         ))}
       </Box>
     </>

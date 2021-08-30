@@ -39,7 +39,11 @@ export default function PromotionProductListGroupCategory({ category }) {
       </Typography>
       <Box flexWrap="wrap" className={classes.productDIV}>
         {promotionProductList.map((product) => (
-          <ProductCard key={product.productId} product={product} />
+          <ProductCard
+            key={product.productId}
+            product={product}
+            promotionBadge={true}
+          />
         ))}
       </Box>
     </>

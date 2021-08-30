@@ -8,9 +8,12 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import { useHistory } from 'react-router-dom';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 import { numberWithCommas } from '../../utils/currency';
 import { shorten } from '../../utils/formatText';
+import Grid from '@material-ui/core/Grid';
+import { Stars } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   root: {
@@ -24,10 +27,27 @@ const useStyles = makeStyles({
   },
   oldPrice: {
     color: 'gray'
+  },
+  square: {
+    height: 40,
+    width: 40,
+    backgroundColor: 'orange'
+  },
+  triangleTopLeft: {
+    width: 0,
+    height: 0,
+    borderTop: '15px solid orange',
+    borderRight: '20px solid transparent'
+  },
+  triangleTopRight: {
+    width: 0,
+    height: 0,
+    borderTop: '15px solid orange',
+    borderLeft: '20px solid transparent'
   }
 });
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, promotionBadge }) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -54,6 +74,33 @@ export default function ProductCard({ product }) {
             }
           />
         )}
+        <Grid container style={{ position: 'relative' }}>
+          {promotionBadge === true && (
+            <div style={{ position: 'absolute', bottom: '85px', right: '0px' }}>
+              <div className={classes.square}>
+                <Typography
+                  style={{ fontWeight: 'bolder', color: 'red', textAlign: 'center' }}
+                  variant="subtitle2"
+                >
+                  {product.discount}%
+                </Typography>
+                <Typography
+                  style={{ color: 'white', textAlign: 'center' }}
+                  variant="subtitle2"
+                >
+                  OFF
+                </Typography>
+              </div>
+              <div style={{ display: 'flex' }}>
+                <div className={classes.triangleTopLeft}></div>
+                <div className={classes.triangleTopRight}></div>
+              </div>
+            </div>
+          )}
+          <FavoriteBorderIcon
+            style={{ position: 'absolute', top: '85px', right: '10px' }}
+          />
+        </Grid>
         <CardContent>
           <Box component="div" style={{ height: 40 }}>
             <Typography variant="body2" component="p">
