@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Carousel from '../Carousel';
 import ProductCard from '../ProductCard';
 import ProductContext from '../../pages/Product/productContext';
+import CustomSkeleton from '../CustomSkeleton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,9 +24,13 @@ export default function SimilarProductList() {
         Products related to this item
       </Typography>
       <Carousel show={6} auto={false}>
-        {store.similarProductList.map((product) => (
-          <ProductCard key={product.productId} product={product} />
-        ))}
+        {store.similarProductList.length === 0 ? (
+          <CustomSkeleton show={6} />
+        ) : (
+          store.similarProductList.map((product) => (
+            <ProductCard key={product.productId} product={product} />
+          ))
+        )}
       </Carousel>
     </div>
   );

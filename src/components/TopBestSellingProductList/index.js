@@ -6,6 +6,7 @@ import ProductCard from '../ProductCard';
 import Typography from '@material-ui/core/Typography';
 import { axiosInstance } from '../../utils/database';
 import HomeContext from '../../pages/Home/homeContext';
+import CustomSkeleton from '../CustomSkeleton';
 
 const useStyles = makeStyles((theme) => ({
   select: {
@@ -61,9 +62,13 @@ export default function TopBestSellingProductList(props) {
         </select>
       </div>
       <Box flexWrap="wrap" className={classes.productDIV}>
-        {store.topBestSellingProductList.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {store.topBestSellingProductList.length === 0 ? (
+          <CustomSkeleton show={6} />
+        ) : (
+          store.topBestSellingProductList.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        )}
       </Box>
     </HomeContext.Provider>
   );

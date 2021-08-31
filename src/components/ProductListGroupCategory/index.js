@@ -4,6 +4,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Box } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { axiosInstance } from '../../utils/database';
+import CustomSkeleton from '../CustomSkeleton';
 
 const useStyles = makeStyles((theme) => ({
   productDIV: {
@@ -36,9 +37,13 @@ export default function ProductListGroupCategory({ category }) {
         {category.categoryName}
       </Typography>
       <Box flexWrap="wrap" className={classes.productDIV}>
-        {productList.map((product) => (
-          <ProductCard key={product.productId} product={product} />
-        ))}
+        {productList.length === 0 ? (
+          <CustomSkeleton show={6} />
+        ) : (
+          productList.map((product) => (
+            <ProductCard key={product.productId} product={product} />
+          ))
+        )}
       </Box>
     </>
   );

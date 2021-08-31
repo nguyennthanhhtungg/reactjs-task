@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Carousel from '../Carousel';
 import ProductCard from '../ProductCard';
+import CustomSkeleton from '../CustomSkeleton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -122,9 +123,13 @@ export default function YourBrowsingHistory() {
         Your Browsing History
       </Typography>
       <Carousel show={6}>
-        {similarProductData.map((product) => (
-          <ProductCard key={product.productId} product={product} />
-        ))}
+        {similarProductData.length === 0 ? (
+          <CustomSkeleton show={6} />
+        ) : (
+          similarProductData.map((product) => (
+            <ProductCard key={product.productId} product={product} />
+          ))
+        )}
       </Carousel>
     </div>
   );
