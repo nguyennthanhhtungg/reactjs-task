@@ -110,12 +110,9 @@ export default function SearchFilter() {
     MySwal.fire({
       title: 'Please Wait !',
       html: 'Loading...',
-      allowEscapeKey: false,
+      allowEscapeKey: true,
       allowOutsideClick: false,
       showConfirmButton: false,
-      onBeforeOpen: () => {
-        MySwal.showLoading();
-      },
       didOpen: () => {
         MySwal.showLoading();
       }
@@ -161,12 +158,9 @@ export default function SearchFilter() {
     MySwal.fire({
       title: 'Please Wait !',
       html: 'Loading...',
-      allowEscapeKey: false,
+      allowEscapeKey: true,
       allowOutsideClick: false,
       showConfirmButton: false,
-      onBeforeOpen: () => {
-        MySwal.showLoading();
-      },
       didOpen: () => {
         MySwal.showLoading();
       }
@@ -228,12 +222,9 @@ export default function SearchFilter() {
     MySwal.fire({
       title: 'Please Wait !',
       html: 'Loading...',
-      allowEscapeKey: false,
+      allowEscapeKey: true,
       allowOutsideClick: false,
       showConfirmButton: false,
-      onBeforeOpen: () => {
-        MySwal.showLoading();
-      },
       didOpen: () => {
         MySwal.showLoading();
       }
