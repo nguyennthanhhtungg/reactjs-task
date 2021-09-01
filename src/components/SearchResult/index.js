@@ -60,7 +60,8 @@ export default function SearchResult() {
     MySwal.fire({
       title: 'Please Wait !',
       html: 'Loading...',
-      allowEscapeKey: true,
+      timer: 5000,
+      allowEscapeKey: false,
       allowOutsideClick: false,
       showConfirmButton: false,
       didOpen: () => {

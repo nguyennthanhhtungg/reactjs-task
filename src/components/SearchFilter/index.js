@@ -110,7 +110,8 @@ export default function SearchFilter() {
     MySwal.fire({
       title: 'Please Wait !',
       html: 'Loading...',
-      allowEscapeKey: true,
+      timer: 5000,
+      allowEscapeKey: false,
       allowOutsideClick: false,
       showConfirmButton: false,
       didOpen: () => {
@@ -158,7 +159,8 @@ export default function SearchFilter() {
     MySwal.fire({
       title: 'Please Wait !',
       html: 'Loading...',
-      allowEscapeKey: true,
+      timer: 5000,
+      allowEscapeKey: false,
       allowOutsideClick: false,
       showConfirmButton: false,
       didOpen: () => {
@@ -222,7 +224,8 @@ export default function SearchFilter() {
     MySwal.fire({
       title: 'Please Wait !',
       html: 'Loading...',
-      allowEscapeKey: true,
+      timer: 5000,
+      allowEscapeKey: false,
       allowOutsideClick: false,
       showConfirmButton: false,
       didOpen: () => {
