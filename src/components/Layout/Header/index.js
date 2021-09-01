@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core';
@@ -66,6 +66,24 @@ export default function Header(props) {
   const classes = useStyles();
   const history = useHistory();
 
+  const [keyWords, setKeyWords] = useState('');
+
+  const handleChangeKeyWords = (e) => {
+    setKeyWords(e.target.value);
+  };
+
+  const handleKeyDownSearching = (e) => {
+    if (e.key === 'Enter' && keyWords !== '') {
+      history.push(`/products?keywords=${keyWords}`);
+    }
+  };
+
+  const handleClickSearching = (e) => {
+    if (keyWords !== '') {
+      history.push(`/products?keywords=${keyWords}`);
+    }
+  };
+
   const clickLogoHandler = () => {
     history.push('/');
   };
@@ -106,8 +124,11 @@ export default function Header(props) {
           <InputBase
             className={classes.searchInput}
             placeholder="Search in ReactJs"
+            value={keyWords}
+            onChange={handleChangeKeyWords}
+            onKeyDown={handleKeyDownSearching}
           />
-          <Button className={classes.searchButton}>
+          <Button className={classes.searchButton} onClick={handleClickSearching}>
             <SearchIcon />
           </Button>
           <Button className={classes.cartButton}>
