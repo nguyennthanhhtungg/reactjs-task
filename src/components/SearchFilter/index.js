@@ -115,6 +115,9 @@ export default function SearchFilter() {
       showConfirmButton: false,
       onBeforeOpen: () => {
         MySwal.showLoading();
+      },
+      didOpen: () => {
+        MySwal.showLoading();
       }
     });
 
@@ -162,6 +165,9 @@ export default function SearchFilter() {
       allowOutsideClick: false,
       showConfirmButton: false,
       onBeforeOpen: () => {
+        MySwal.showLoading();
+      },
+      didOpen: () => {
         MySwal.showLoading();
       }
     });
@@ -226,6 +232,9 @@ export default function SearchFilter() {
       allowOutsideClick: false,
       showConfirmButton: false,
       onBeforeOpen: () => {
+        MySwal.showLoading();
+      },
+      didOpen: () => {
         MySwal.showLoading();
       }
     });

@@ -65,6 +65,9 @@ export default function SearchResult() {
       showConfirmButton: false,
       onBeforeOpen: () => {
         MySwal.showLoading();
+      },
+      didOpen: () => {
+        MySwal.showLoading();
       }
     });
 
