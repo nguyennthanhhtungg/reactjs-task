@@ -49,14 +49,14 @@ export default function Location() {
           </Grid>
           <Grid item xs={5} className={classes.gridRight}>
             <Typography variant="subtitle2" style={{ fontWeight: 'bolder' }}>
-              0868042318
+              0868034705
             </Typography>
           </Grid>
         </Grid>
       </div>
       <div style={{ color: 'gray' }}>
-        1220/21/8 hẻm 05, đường Huỳnh Văn Lũy, khu phố 8, Phường Phú Mỹ, Thành phố
-        Thủ Dầu Một, Bình Dương
+        34/5 hẻm 05, đường Lê Hồng Phong, khu phố 1, Phường Hòa Phú, Thành phố Thủ
+        Dầu Một, Bình Dương
       </div>
     </div>
   );
