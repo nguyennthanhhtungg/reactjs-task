@@ -6,7 +6,7 @@ import Rating from '@material-ui/lab/Rating';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import Carousel from '../Carousel';
 import { numberWithCommas } from '../../utils/currency';
@@ -117,6 +117,7 @@ export default function ProductDetail() {
   const { store } = useContext(ProductContext);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const storeContext = useContext(Context);
+  const history = useHistory();
 
   const changeImageIndexHandler = (index) => {
     setCurrentImageIndex(index);
@@ -150,8 +151,6 @@ export default function ProductDetail() {
       }
 
       localStorage.setItem('ProductListInCart', JSON.stringify(productListInCart));
-
-      mySwal.AddToCart();
     }
 
     numberProductsInCart += 1;
@@ -169,6 +168,13 @@ export default function ProductDetail() {
         productListInCart: productListInCart
       }
     });
+
+    mySwal.AddToCart();
+  };
+
+  const handleBuyNow = () => {
+    handleAddToCart();
+    history.push('/cart');
   };
 
   return (
@@ -250,7 +256,9 @@ export default function ProductDetail() {
           <Button className={classes.addToCart} onClick={handleAddToCart}>
             Add to Cart
           </Button>
-          <Button className={classes.buyNow}>Buy Now</Button>
+          <Button className={classes.buyNow} onClick={handleBuyNow}>
+            Buy Now
+          </Button>
         </div>
       </Grid>
     </Grid>
