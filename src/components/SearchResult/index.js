@@ -3,13 +3,10 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Box, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import ProductsContext from '../../pages/Products/productsContext';
-import CustomSkeleton from '../CustomSkeleton';
 import ProductCard from '../ProductCard';
-import HomeContext from '../../pages/Home/homeContext';
 import { axiosInstance } from '../../utils/database';
 import * as queryString from 'query-string';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+import * as mySwal from '../../utils/mySwal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,20 +51,9 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchResult() {
   const classes = useStyles();
   const { store, dispatch } = useContext(ProductsContext);
-  const MySwal = withReactContent(Swal);
 
   const handleChangeType = async (e) => {
-    MySwal.fire({
-      title: 'Please Wait !',
-      html: 'Loading...',
-      timer: 5000,
-      allowEscapeKey: false,
-      allowOutsideClick: false,
-      showConfirmButton: false,
-      didOpen: () => {
-        MySwal.showLoading();
-      }
-    });
+    mySwal.Loading();
 
     let productListRes = [];
     if (
@@ -103,7 +89,7 @@ export default function SearchResult() {
       }
     });
 
-    MySwal.close();
+    mySwal.Close();
   };
 
   return (

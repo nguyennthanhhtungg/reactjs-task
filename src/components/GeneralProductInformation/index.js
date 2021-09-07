@@ -12,6 +12,8 @@ import Carousel from '../Carousel';
 import { numberWithCommas } from '../../utils/currency';
 import ProductContext from '../../pages/Product/productContext';
 import SmallThumbnailImage from './SmallThumbnailImage';
+import Context from '../../contexts';
+import * as mySwal from '../../utils/mySwal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -109,14 +111,64 @@ const imageListData = [
   'https://via.placeholder.com/150'
 ];
 
-export default function ProductDetail({ product }) {
+export default function ProductDetail() {
   const classes = useStyles();
   const [quantity, setQuantity] = useState(1);
   const { store } = useContext(ProductContext);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const storeContext = useContext(Context);
 
   const changeImageIndexHandler = (index) => {
     setCurrentImageIndex(index);
+  };
+
+  const handleAddToCart = () => {
+    let productListInCart = JSON.parse(localStorage.getItem('ProductListInCart'));
+    let numberProductsInCart = 0;
+
+    if (productListInCart !== null) {
+      productListInCart.forEach((product) => {
+        numberProductsInCart += parseInt(product.numberInCart);
+      });
+    }
+
+    if (productListInCart === null) {
+      productListInCart = [{ ...store.product, numberInCart: 1 }];
+      localStorage.setItem('ProductListInCart', JSON.stringify(productListInCart));
+    } else {
+      let isExistedInCart = false;
+      productListInCart = productListInCart.map((product) => {
+        if (product.productId === store.product.productId) {
+          isExistedInCart = true;
+          product.numberInCart += 1;
+        }
+        return product;
+      });
+
+      if (isExistedInCart === false) {
+        productListInCart.push({ ...store.product, numberInCart: 1 });
+      }
+
+      localStorage.setItem('ProductListInCart', JSON.stringify(productListInCart));
+
+      mySwal.AddToCart();
+    }
+
+    numberProductsInCart += 1;
+
+    storeContext.dispatch({
+      type: 'updateNumberProductsInCart',
+      payload: {
+        numberProductsInCart: numberProductsInCart
+      }
+    });
+
+    storeContext.dispatch({
+      type: 'updateProductListInCart',
+      payload: {
+        productListInCart: productListInCart
+      }
+    });
   };
 
   return (
@@ -195,7 +247,9 @@ export default function ProductDetail({ product }) {
           </Button>
         </div>
         <div style={{ marginTop: 10 }}>
-          <Button className={classes.addToCart}>Add to Cart</Button>
+          <Button className={classes.addToCart} onClick={handleAddToCart}>
+            Add to Cart
+          </Button>
           <Button className={classes.buyNow}>Buy Now</Button>
         </div>
       </Grid>

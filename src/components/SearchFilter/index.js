@@ -9,12 +9,11 @@ import { Button, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Rating from '@material-ui/lab/Rating';
 import * as queryString from 'query-string';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 
 import ProductsContext from '../../pages/Products/productsContext';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { axiosInstance } from '../../utils/database';
+import * as mySwal from '../../utils/mySwal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchFilter() {
   const classes = useStyles();
   const { store, dispatch } = useContext(ProductsContext);
-  const MySwal = withReactContent(Swal);
 
   const handleChangeFromPrice = (e) => {
     const min = parseFloat(e.target.min);
@@ -107,17 +105,7 @@ export default function SearchFilter() {
   };
 
   const handleApply = async () => {
-    MySwal.fire({
-      title: 'Please Wait !',
-      html: 'Loading...',
-      timer: 5000,
-      allowEscapeKey: false,
-      allowOutsideClick: false,
-      showConfirmButton: false,
-      didOpen: () => {
-        MySwal.showLoading();
-      }
-    });
+    mySwal.Loading();
 
     let productListRes = [];
     if (
@@ -152,21 +140,11 @@ export default function SearchFilter() {
       }
     });
 
-    MySwal.close();
+    mySwal.Close();
   };
 
   const handleChangeSelectedCategory = async (e) => {
-    MySwal.fire({
-      title: 'Please Wait !',
-      html: 'Loading...',
-      timer: 5000,
-      allowEscapeKey: false,
-      allowOutsideClick: false,
-      showConfirmButton: false,
-      didOpen: () => {
-        MySwal.showLoading();
-      }
-    });
+    mySwal.Loading();
 
     let newSelectedCategoryList = [];
     if (e.target.checked === true) {
@@ -217,21 +195,11 @@ export default function SearchFilter() {
       });
     }
 
-    MySwal.close();
+    mySwal.Close();
   };
 
   const handleChangeSelectedSupplier = async (e) => {
-    MySwal.fire({
-      title: 'Please Wait !',
-      html: 'Loading...',
-      timer: 5000,
-      allowEscapeKey: false,
-      allowOutsideClick: false,
-      showConfirmButton: false,
-      didOpen: () => {
-        MySwal.showLoading();
-      }
-    });
+    mySwal.Loading();
 
     let newSelectedSupplierList = [];
     if (e.target.checked === true) {
@@ -283,7 +251,7 @@ export default function SearchFilter() {
       });
     }
 
-    MySwal.close();
+    mySwal.Close();
   };
 
   return (

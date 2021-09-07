@@ -9,6 +9,7 @@ import Product from './pages/Product';
 import ScrollToTop from './ScrollToTop';
 import Promotion from './pages/Promotion';
 import Products from './pages/Products';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route exact path="/products">
             <Products />
+          </Route>
+          <Route exact path="/cart">
+            <Cart />
           </Route>
         </Switch>
       </ScrollToTop>

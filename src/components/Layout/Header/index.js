@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core';
@@ -10,6 +10,8 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useHistory, Link } from 'react-router-dom';
 
 import Menu from '../Menu';
+import Badge from '@material-ui/core/Badge';
+import Context from '../../../contexts';
 
 const useStyles = makeStyles((theme) => ({
   navBar: {
@@ -65,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Header(props) {
   const classes = useStyles();
   const history = useHistory();
+  const { store } = useContext(Context);
 
   const [keyWords, setKeyWords] = useState('');
 
@@ -86,6 +89,10 @@ export default function Header(props) {
 
   const clickLogoHandler = () => {
     history.push('/');
+  };
+
+  const handleRedirectToCartPage = () => {
+    history.push('/cart');
   };
 
   return (
@@ -131,8 +138,10 @@ export default function Header(props) {
           <Button className={classes.searchButton} onClick={handleClickSearching}>
             <SearchIcon />
           </Button>
-          <Button className={classes.cartButton}>
-            <ShoppingCartIcon fontSize="large" />
+          <Button className={classes.cartButton} onClick={handleRedirectToCartPage}>
+            <Badge badgeContent={store.numberProductsInCart} color="primary">
+              <ShoppingCartIcon fontSize="large" />
+            </Badge>
           </Button>
         </div>
         <img
