@@ -47,7 +47,9 @@ export default function Cart() {
   const [isProductExisted, setIsProductExisted] = useState(false);
 
   useEffect(() => {
-    const productListInCart = JSON.parse(localStorage.getItem('ProductListInCart'));
+    const productListInCart = JSON.parse(
+      sessionStorage.getItem('ProductListInCart')
+    );
 
     if (productListInCart !== null && productListInCart.length !== 0) {
       setIsProductExisted(true);
@@ -57,7 +59,7 @@ export default function Cart() {
   const handlePlaceOrder = () => {
     mySwal.PlaceOrder();
 
-    localStorage.removeItem('ProductListInCart');
+    sessionStorage.removeItem('ProductListInCart');
     history.push('/');
   };
 
@@ -66,7 +68,7 @@ export default function Cart() {
   };
 
   return (
-    <Layout>
+    <>
       <Helmet>
         <title>Cart | React App</title>
       </Helmet>
@@ -112,6 +114,6 @@ export default function Cart() {
           </div>
         )}
       </Container>
-    </Layout>
+    </>
   );
 }

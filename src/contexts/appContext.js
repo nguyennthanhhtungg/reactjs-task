@@ -1,10 +1,11 @@
 import { createContext } from 'react';
 
 const defaultValue = {
+  customer: {},
   numberProductsInCart: 0,
   productListInCart: []
 };
 
-const Context = createContext(defaultValue);
+const AppContext = createContext(defaultValue);
 
-export default Context;
+export default AppContext;

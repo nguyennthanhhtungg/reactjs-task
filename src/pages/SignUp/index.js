@@ -6,7 +6,10 @@ import { useHistory } from 'react-router-dom';
 
 import Layout from '../../components/Layout';
 import Helmet from 'react-helmet';
-import ProductContext from '../Product/productContext';
+import { axiosInstance } from '../../utils/database';
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,8 +23,10 @@ const useStyles = makeStyles((theme) => ({
   input: {
     display: 'block',
     padding: 15,
+    marginBottom: 20,
+    fontSize: 'larger',
     borderWidth: 1,
-    width: '96%',
+    width: '94%',
     borderColor: 'orange',
     borderStyle: 'solid',
     '&:focus': {
@@ -61,8 +66,11 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
   const history = useHistory();
-
-  const [method, setMethod] = useState('PhoneNumber');
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    severity: '',
+    message: ''
+  });
 
   const {
     register,
@@ -70,9 +78,19 @@ export default function SignUp() {
     watch,
     formState: { errors }
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    history.push('/verification?signupType=phone');
+  const onSubmit = async (data) => {
+    try {
+      const res = await axiosInstance.post('/auth/register', data);
+      localStorage.setItem('email', res.data.email);
+      // localStorage.setItem('customer', JSON.stringify(res.data));
+      history.push('/verification');
+    } catch (err) {
+      setSnackbar({
+        open: true,
+        severity: 'error',
+        message: err.response.data.Message
+      });
+    }
   };
 
   const facebookLoginHandler = () => {
@@ -83,56 +101,59 @@ export default function SignUp() {
     history.push('/');
   };
 
-  console.log(watch('example')); // watch input value by passing the name of it
+  // console.log(watch('example')); // watch input value by passing the name of it
 
   return (
-    <Layout>
+    <>
       <Helmet>
         <title>Sign Up | React App</title>
       </Helmet>
       <Container maxWidth="sm" className={classes.root}>
-        <Typography variant="h5">Welcome to ReactJs! Please login.</Typography>
+        <Typography variant="h4">Create Your Account</Typography>
 
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-          <Typography>Phone Number or Email (*)</Typography>
           <input
-            placeholder="Please enter your Phone Number or Email"
+            placeholder="Full Name"
             defaultValue=""
-            {...register('userNameRequired', { required: true })}
+            {...register('customerName', { required: true })}
             className={classes.input}
+            required={true}
           />
-          {errors.userNameRequired && (
-            <span style={{ color: 'red' }}>This field is required</span>
-          )}
-          <br />
-          <Typography>Full name (*)</Typography>
+
           <input
-            placeholder="First Last"
+            placeholder="Enter your email"
             defaultValue=""
-            {...register('fullNameRequired', { required: true })}
+            type="email"
+            {...register('email', {
+              required: true
+            })}
             className={classes.input}
+            required={true}
           />
-          {errors.fullNameRequired && (
-            <span style={{ color: 'red' }}>This field is required</span>
-          )}
-          <br />
-          <Typography>Password (*)</Typography>
+
+          <input
+            placeholder="Enter your phone number"
+            defaultValue=""
+            {...register('phoneNumber', { required: true })}
+            className={classes.input}
+            required={true}
+          />
+
           <input
             type="password"
-            placeholder="Please enter your Password"
-            {...register('passwordRequired', { required: true })}
+            placeholder="Enter your password"
+            {...register('password', { required: true })}
             className={classes.input}
+            required={true}
+            minLength={6}
           />
-          {errors.passwordRequired && (
-            <span style={{ color: 'red' }}>This field is required</span>
-          )}
 
           <div className={classes.loginBtnDIV}>
             <button type="submit" className={classes.loginBtn}>
               SIGN UP
             </button>
           </div>
-          <br />
+
           <Typography>Or, login with</Typography>
           <div className={classes.loginBtnDIV}>
             <button
@@ -156,6 +177,17 @@ export default function SignUp() {
           </div>
         </form>
       </Container>
-    </Layout>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        open={snackbar.open}
+        autoHideDuration={3000}
+        TransitionComponent={Slide}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+      >
+        <Alert variant="filled" severity={snackbar.severity}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </>
   );
 }

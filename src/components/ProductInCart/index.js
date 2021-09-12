@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import Checkbox from '@material-ui/core/Checkbox';
 import { Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from 'react-router-dom';
-import Context from '../../contexts';
+import Context from '../../contexts/appContext';
 import { numberWithCommas } from '../../utils/currency';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -116,7 +115,9 @@ export default function ProductInCart({ product }) {
   const [number, setNumber] = useState(product.numberInCart);
 
   useEffect(() => {
-    const productListInCart = JSON.parse(localStorage.getItem('ProductListInCart'));
+    const productListInCart = JSON.parse(
+      sessionStorage.getItem('ProductListInCart')
+    );
     let numberProductsInCart = 0;
 
     productListInCart.forEach((product) => {
@@ -146,7 +147,10 @@ export default function ProductInCart({ product }) {
       return item;
     });
 
-    localStorage.setItem('ProductListInCart', JSON.stringify(newProductListInCart));
+    sessionStorage.setItem(
+      'ProductListInCart',
+      JSON.stringify(newProductListInCart)
+    );
 
     setNumber(number - 1);
   };
@@ -159,7 +163,10 @@ export default function ProductInCart({ product }) {
       return item;
     });
 
-    localStorage.setItem('ProductListInCart', JSON.stringify(newProductListInCart));
+    sessionStorage.setItem(
+      'ProductListInCart',
+      JSON.stringify(newProductListInCart)
+    );
 
     setNumber(number + 1);
   };
@@ -183,7 +190,10 @@ export default function ProductInCart({ product }) {
       }
     });
 
-    localStorage.setItem('ProductListInCart', JSON.stringify(newProductListInCart));
+    sessionStorage.setItem(
+      'ProductListInCart',
+      JSON.stringify(newProductListInCart)
+    );
 
     setNumber(0);
 

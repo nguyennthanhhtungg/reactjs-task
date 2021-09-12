@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, makeStyles, Typography } from '@material-ui/core';
-import Context from '../../contexts';
+import Context from '../../contexts/appContext';
 import { numberWithCommas } from '../../utils/currency';
 
 const useStyles = makeStyles(() => ({

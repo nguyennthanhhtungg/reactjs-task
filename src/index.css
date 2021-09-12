@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* Hide the HTML5 Number Input’s Arrow Buttons */
+/* Chrome, Safari, Edge, Opera */
+#OTPCodeInput::-webkit-outer-spin-button,
+#OTPCodeInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+#OTPCodeInput {
+  -moz-appearance: textfield;
+}

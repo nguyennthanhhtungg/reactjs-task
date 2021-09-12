@@ -11,7 +11,8 @@ import { useHistory, Link } from 'react-router-dom';
 
 import Menu from '../Menu';
 import Badge from '@material-ui/core/Badge';
-import Context from '../../../contexts';
+import Context from '../../../contexts/appContext';
+import AccountNavBar from './AccountNavBar';
 
 const useStyles = makeStyles((theme) => ({
   navBar: {
@@ -110,12 +111,19 @@ export default function Header(props) {
         <Link to="/" className={classes.link}>
           TRACK MY ORDER
         </Link>
-        <Link to="/login" className={classes.link}>
-          LOGIN
-        </Link>
-        <Link to="/register" className={classes.link}>
-          SIGNUP
-        </Link>
+        {store.customer.customerName === undefined ? (
+          <>
+            <Link to="/login" className={classes.link}>
+              LOGIN
+            </Link>
+            <Link to="/register" className={classes.link}>
+              SIGNUP
+            </Link>
+          </>
+        ) : (
+          <AccountNavBar customer={store.customer} />
+        )}
+
         <Link to="/" className={classes.link}>
           THAY ĐỔI NGÔN NGỮ
         </Link>

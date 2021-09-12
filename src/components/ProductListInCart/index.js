@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Context from '../../contexts';
+import Context from '../../contexts/appContext';
 import ProductInCart from '../ProductInCart';
 import Dialog from '@material-ui/core/Dialog';
 import Transition from 'react-transition-group/Transition';
@@ -64,7 +64,7 @@ export default function ProductListInCart(props) {
   };
 
   const handleRemove = () => {
-    localStorage.removeItem('ProductListInCart');
+    sessionStorage.removeItem('ProductListInCart');
 
     dispatch({
       type: 'updateNumberProductsInCart',

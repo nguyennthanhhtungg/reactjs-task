@@ -89,7 +89,7 @@ export default function Home() {
   };
 
   return (
-    <Layout>
+    <>
       <Helmet>
         <title>Home | React App</title>
       </Helmet>
@@ -141,6 +141,6 @@ export default function Home() {
           </HomeContext.Provider>
         </div>
       </Container>
-    </Layout>
+    </>
   );
 }

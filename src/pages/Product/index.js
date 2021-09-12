@@ -114,52 +114,48 @@ export default function Product({ props }) {
   };
 
   return (
-    <Layout>
-      <ProductContext.Provider value={{ store, dispatch }}>
-        <Helmet>
-          <title>{store.product.productName} | React App</title>
-        </Helmet>
-        <Container className={classes.root}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              paddingTop: 10,
-              paddingBottom: 10
-            }}
+    <ProductContext.Provider value={{ store, dispatch }}>
+      <Helmet>
+        <title>{store.product.productName} | React App</title>
+      </Helmet>
+      <Container className={classes.root}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            paddingTop: 10,
+            paddingBottom: 10
+          }}
+        >
+          <Breadcrumbs
+            className={classes.breadcrumbs}
+            separator={<NavigateNextIcon />}
+            aria-label="breadcrumb"
           >
-            <Breadcrumbs
-              className={classes.breadcrumbs}
-              separator={<NavigateNextIcon />}
-              aria-label="breadcrumb"
-            >
-              <Link to="/" className={classes.link}>
-                {store.product.category.categoryName}
-              </Link>
-              <Link to="/" className={classes.link}>
-                SubMenu
-              </Link>
-              <Typography color="textPrimary">
-                {store.product.productName}
-              </Typography>
-            </Breadcrumbs>
-            <Button
-              onClick={handleClickBack}
-              variant="outlined"
-              className={classes.backBtn}
-              size="small"
-            >
-              BACK
-              <NavigateNextIcon />
-            </Button>
-          </div>
-          <GeneralProductInformation />
-          <SimilarProductList />
-          <ProductDesctiption />
-          <ProductDetails />
-          <YourBrowsingHistory />
-        </Container>
-      </ProductContext.Provider>
-    </Layout>
+            <Link to="/" className={classes.link}>
+              {store.product.category.categoryName}
+            </Link>
+            <Link to="/" className={classes.link}>
+              SubMenu
+            </Link>
+            <Typography color="textPrimary">{store.product.productName}</Typography>
+          </Breadcrumbs>
+          <Button
+            onClick={handleClickBack}
+            variant="outlined"
+            className={classes.backBtn}
+            size="small"
+          >
+            BACK
+            <NavigateNextIcon />
+          </Button>
+        </div>
+        <GeneralProductInformation />
+        <SimilarProductList />
+        <ProductDesctiption />
+        <ProductDetails />
+        <YourBrowsingHistory />
+      </Container>
+    </ProductContext.Provider>
   );
 }

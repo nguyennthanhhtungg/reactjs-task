@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,8 +10,8 @@ import Zoom from '@material-ui/core/Zoom';
 
 import Header from './Header';
 import Footer from './Footer';
-import Context from '../../contexts';
-import reducer from '../../reducers';
+import Context from '../../contexts/appContext';
+import reducer from '../../reducers/appReducer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,50 +55,20 @@ ScrollTop.propTypes = {
   window: PropTypes.func
 };
 
-const initialState = {
-  numberProductsInCart: 0,
-  productListInCart: []
-};
-
 export default function Layout(props) {
-  const [store, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    let productListInCart = JSON.parse(localStorage.getItem('ProductListInCart'));
-    let numberProductsInCart = 0;
-
-    if (productListInCart !== null) {
-      productListInCart.forEach((product) => {
-        numberProductsInCart += parseInt(product.numberInCart);
-      });
-    } else {
-      productListInCart = [];
-    }
-
-    dispatch({
-      type: 'init',
-      payload: {
-        numberProductsInCart: numberProductsInCart,
-        productListInCart: productListInCart
-      }
-    });
-  }, []);
-
   return (
-    <Context.Provider value={{ store, dispatch }}>
-      <React.Fragment>
-        <Header />
-        <Toolbar id="back-to-top-anchor" />
-        <Box my={8.5} style={{ backgroundColor: '#d3e9f3' }}>
-          {props.children}
-        </Box>
-        <ScrollTop>
-          <Fab color="secondary" size="small" aria-label="scroll back to top">
-            <ArrowUpwardIcon />
-          </Fab>
-        </ScrollTop>
-        <Footer />
-      </React.Fragment>
-    </Context.Provider>
+    <React.Fragment>
+      <Header />
+      <Toolbar id="back-to-top-anchor" />
+      <Box my={8.5} style={{ backgroundColor: '#d3e9f3' }}>
+        {props.children}
+      </Box>
+      <ScrollTop>
+        <Fab color="secondary" size="small" aria-label="scroll back to top">
+          <ArrowUpwardIcon />
+        </Fab>
+      </ScrollTop>
+      <Footer />
+    </React.Fragment>
   );
 }

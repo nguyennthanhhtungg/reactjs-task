@@ -84,7 +84,7 @@ export default function Promotion() {
   }, []);
 
   return (
-    <Layout>
+    <>
       <Helmet>
         <title>Promotion | React App</title>
       </Helmet>
@@ -103,6 +103,6 @@ export default function Promotion() {
           );
         })}
       </Container>
-    </Layout>
+    </>
   );
 }

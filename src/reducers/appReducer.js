@@ -20,6 +20,12 @@ export default function reducer(state, action) {
         numberProductsInCart: action.payload.numberProductsInCart
       };
 
+    case 'updateCustomer':
+      return {
+        ...state,
+        customer: action.payload.customer
+      };
+
     default:
       return state;
   }

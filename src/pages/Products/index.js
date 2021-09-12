@@ -79,22 +79,20 @@ export default function Products(props) {
   }, [keywords]);
 
   return (
-    <Layout>
-      <ProductsContext.Provider value={{ store, dispatch }}>
-        <Helmet>
-          <title>{store.keywords} | React App</title>
-        </Helmet>
-        <Container maxWidth="lg" className={classes.root}>
-          <Grid container style={{ backgroundColor: 'white' }}>
-            <Grid item xs={3} className={classes.gridLeft}>
-              <SearchFilter />
-            </Grid>
-            <Grid item xs={9} className={classes.gridRight}>
-              <SearchResult />
-            </Grid>
+    <ProductsContext.Provider value={{ store, dispatch }}>
+      <Helmet>
+        <title>{store.keywords} | React App</title>
+      </Helmet>
+      <Container maxWidth="lg" className={classes.root}>
+        <Grid container style={{ backgroundColor: 'white' }}>
+          <Grid item xs={3} className={classes.gridLeft}>
+            <SearchFilter />
           </Grid>
-        </Container>
-      </ProductsContext.Provider>
-    </Layout>
+          <Grid item xs={9} className={classes.gridRight}>
+            <SearchResult />
+          </Grid>
+        </Grid>
+      </Container>
+    </ProductsContext.Provider>
   );
 }

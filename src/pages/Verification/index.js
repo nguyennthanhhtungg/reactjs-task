@@ -11,6 +11,11 @@ import * as queryString from 'query-string';
 import Layout from '../../components/Layout';
 import Helmet from 'react-helmet';
 import ProductContext from '../Product/productContext';
+import { spawn } from 'env-cmd/dist/spawn';
+import { axiosInstance } from '../../utils/database';
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     padding: 15,
     borderWidth: 1,
+    marginBottom: 20,
     width: '96%',
     borderColor: 'orange',
     borderStyle: 'solid',
@@ -73,13 +79,46 @@ export default function Verification(props) {
   const history = useHistory();
   const [flag, setFlag] = useState(false);
   const [timeOut, setTimeOut] = useState(0);
-  const [isDisableSend, setIsDisableSend] = useState(false);
-  const [signupType] = useState(
-    queryString.parse(window.location.search).signupType
-  );
+  const [isDisableSend, setIsDisableSend] = useState(true);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    severity: '',
+    message: ''
+  });
+  // const [signupType] = useState(
+  //   queryString.parse(window.location.search).signupType
+  // );
 
-  const sendSMSCodeHandler = () => {
+  const [email, setEmail] = useState('');
+  const [OTPCode, setOTPCode] = useState('');
+
+  useEffect(() => {
+    const email = localStorage.getItem('email');
+    setEmail(email);
+  }, []);
+
+  const sendOTPCodeHandler = () => {
+    setFlag(true);
+    resendOTPCodeHandler();
+  };
+
+  const resendOTPCodeHandler = async () => {
     setIsDisableSend(true);
+
+    try {
+      const res = await axiosInstance.get(`/auth/sendOTPCode?email=${email}`);
+      setSnackbar({
+        open: true,
+        severity: 'success',
+        message: res.data
+      });
+    } catch (err) {
+      setSnackbar({
+        open: true,
+        severity: 'error',
+        message: err.response.data.Message
+      });
+    }
 
     setTimeOut(60);
   };
@@ -95,21 +134,46 @@ export default function Verification(props) {
     }, 1000);
   }, [timeOut]);
 
+  const handleChangeOTPCode = (e) => {
+    if (e.key >= '0' && e.key <= '9') {
+      setOTPCode(parseInt(OTPCode + e.key));
+    }
+
+    if (e.key === 'Backspace') {
+      setOTPCode(parseInt(OTPCode / 10));
+    }
+  };
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors }
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    history.push('/');
+  const onSubmit = async (data) => {
+    try {
+      const res = await axiosInstance.post(`/auth/verifyTwoStepVerification`, data);
+      setSnackbar({
+        open: true,
+        severity: 'success',
+        message: res.data
+      });
+
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      history.push('/login');
+    } catch (err) {
+      setSnackbar({
+        open: true,
+        severity: 'error',
+        message: err.response.data.Message
+      });
+    }
   };
 
-  console.log(watch('example')); // watch input value by passing the name of it
+  // console.log(watch('example')); // watch input value by passing the name of it
 
   return (
-    <Layout>
+    <>
       <Helmet>
         <title>Verification | React App</title>
       </Helmet>
@@ -130,69 +194,53 @@ export default function Verification(props) {
                 Please choose a way to verify:
               </Typography>
               <Button
-                onClick={() => {
-                  setFlag(true);
-                }}
+                onClick={sendOTPCodeHandler}
                 type="button"
                 className={classes.verificationBtn}
               >
-                <PhoneAndroidIcon />
-                {signupType === 'phone'
-                  ? 'Verify through SMS Code'
-                  : 'Verify through Email Code'}
+                <MailOutlineIcon />
+                Verify through Email Code
               </Button>
             </div>
           </>
         )}
         {flag === true && (
           <>
-            <Typography variant="h5">
-              {signupType === 'phone' ? 'Mobile Verification' : 'Email Verification'}
-            </Typography>
+            <Typography variant="h5">Email Verification</Typography>
             <div className={classes.verification}>
-              {signupType === 'phone' ? (
+              <div style={{ display: 'flex' }}>
+                <MailOutlineIcon />
                 <Typography>
-                  <PhoneAndroidIcon />
-                  We will send a one time SMS code to your Mobile Number
-                </Typography>
-              ) : (
-                <Typography>
-                  <MailOutlineIcon />
                   We will send a one time Email code to your Email
                 </Typography>
-              )}
-
+              </div>
               <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
                 <input
                   placeholder="Please enter your phone number"
-                  defaultValue={
-                    signupType === 'phone'
-                      ? '0123456789'
-                      : 'tung-thanh.nguyen@capgemini.com'
-                  }
+                  defaultValue={email}
                   readOnly={true}
-                  {...register('phoneNumberRequired', { required: true })}
+                  {...register('email', { required: true })}
                   className={classes.input}
+                  required="true"
                 />
-                {errors.phoneNumberRequired && (
-                  <span style={{ color: 'red' }}>This field is required</span>
-                )}
-                <br />
+
                 <input
+                  id="OTPCodeInput"
                   placeholder="6 digits"
-                  {...register('codeRequired', { required: true })}
+                  type="number"
+                  onKeyDown={handleChangeOTPCode}
+                  value={OTPCode}
+                  {...register('otpCode', { required: true })}
                   className={classes.codeInput}
+                  required="true"
                 />
-                {errors.codeRequired && (
-                  <span style={{ color: 'red' }}>This field is required</span>
-                )}
 
                 <Button
-                  onClick={sendSMSCodeHandler}
+                  onClick={resendOTPCodeHandler}
                   disabled={isDisableSend}
                   className={classes.sendBtn}
                 >
-                  Send{timeOut !== 0 ? '(' + timeOut + ')' : ''}
+                  Resend{timeOut !== 0 ? '(' + timeOut + ')' : ''}
                 </Button>
 
                 <Button type="submit" className={classes.verificationBtn}>
@@ -203,6 +251,17 @@ export default function Verification(props) {
           </>
         )}
       </Container>
-    </Layout>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        open={snackbar.open}
+        autoHideDuration={3000}
+        TransitionComponent={Slide}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+      >
+        <Alert variant="filled" severity={snackbar.severity}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </>
   );
 }

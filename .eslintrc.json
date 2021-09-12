@@ -20,7 +20,8 @@
     },
     "plugins": [
         "react",
-        "prettier"
+        "prettier",
+        "module-resolver"
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",

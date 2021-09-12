@@ -12,7 +12,7 @@ import Carousel from '../Carousel';
 import { numberWithCommas } from '../../utils/currency';
 import ProductContext from '../../pages/Product/productContext';
 import SmallThumbnailImage from './SmallThumbnailImage';
-import Context from '../../contexts';
+import AppContext from '../../contexts/appContext';
 import * as mySwal from '../../utils/mySwal';
 
 const useStyles = makeStyles((theme) => ({
@@ -116,7 +116,7 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const { store } = useContext(ProductContext);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const storeContext = useContext(Context);
+  const appContext = useContext(AppContext);
   const history = useHistory();
 
   const changeImageIndexHandler = (index) => {
@@ -124,7 +124,7 @@ export default function ProductDetail() {
   };
 
   const handleAddToCart = () => {
-    let productListInCart = JSON.parse(localStorage.getItem('ProductListInCart'));
+    let productListInCart = JSON.parse(sessionStorage.getItem('ProductListInCart'));
     let numberProductsInCart = 0;
 
     if (productListInCart !== null) {
@@ -135,7 +135,7 @@ export default function ProductDetail() {
 
     if (productListInCart === null) {
       productListInCart = [{ ...store.product, numberInCart: 1 }];
-      localStorage.setItem('ProductListInCart', JSON.stringify(productListInCart));
+      sessionStorage.setItem('ProductListInCart', JSON.stringify(productListInCart));
     } else {
       let isExistedInCart = false;
       productListInCart = productListInCart.map((product) => {
@@ -150,19 +150,19 @@ export default function ProductDetail() {
         productListInCart.push({ ...store.product, numberInCart: 1 });
       }
 
-      localStorage.setItem('ProductListInCart', JSON.stringify(productListInCart));
+      sessionStorage.setItem('ProductListInCart', JSON.stringify(productListInCart));
     }
 
     numberProductsInCart += 1;
 
-    storeContext.dispatch({
+    appContext.dispatch({
       type: 'updateNumberProductsInCart',
       payload: {
         numberProductsInCart: numberProductsInCart
       }
     });
 
-    storeContext.dispatch({
+    appContext.dispatch({
       type: 'updateProductListInCart',
       payload: {
         productListInCart: productListInCart
