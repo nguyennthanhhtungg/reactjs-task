@@ -93,7 +93,7 @@ export default function Verification(props) {
   const [OTPCode, setOTPCode] = useState('');
 
   useEffect(() => {
-    const email = localStorage.getItem('email');
+    const email = sessionStorage.getItem('email');
     setEmail(email);
   }, []);
 

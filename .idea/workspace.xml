@@ -20,36 +20,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ad70d15-fbce-4e93-8e59-6599e28e2216" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Layout/Header/AccountNavBar/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/LogInComponent/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/contexts/appContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reducers/appReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/GeneralProductInformation/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GeneralProductInformation/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Layout/Header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Layout/Header/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Layout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Layout/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Layout/Header/AccountNavBar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Layout/Header/AccountNavBar/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Location/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Location/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LogInComponent/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LogInComponent/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/OrderSummary/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderSummary/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProductInCart/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProductInCart/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProductListInCart/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProductListInCart/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/contexts/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Cart/cartContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Cart/cartContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Cart/cartReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Cart/cartReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Cart/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Cart/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Home/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/LogIn/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LogIn/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Product/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Product/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Products/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Products/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Promotion/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Promotion/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/SignUp/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/SignUp/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Verification/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Verification/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/database.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +119,8 @@
       <workItem from="1631437982074" duration="670000" />
       <workItem from="1631439213904" duration="14000" />
       <workItem from="1631439229909" duration="7299000" />
-      <workItem from="1631462206553" duration="4062000" />
+      <workItem from="1631462206553" duration="4320000" />
+      <workItem from="1631498905978" duration="11936000" />
     </task>
     <servers />
   </component>

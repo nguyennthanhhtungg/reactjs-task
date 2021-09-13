@@ -134,26 +134,26 @@ export default function ProductDetail() {
     }
 
     if (productListInCart === null) {
-      productListInCart = [{ ...store.product, numberInCart: 1 }];
+      productListInCart = [{ ...store.product, numberInCart: quantity }];
       sessionStorage.setItem('ProductListInCart', JSON.stringify(productListInCart));
     } else {
       let isExistedInCart = false;
       productListInCart = productListInCart.map((product) => {
         if (product.productId === store.product.productId) {
           isExistedInCart = true;
-          product.numberInCart += 1;
+          product.numberInCart += quantity;
         }
         return product;
       });
 
       if (isExistedInCart === false) {
-        productListInCart.push({ ...store.product, numberInCart: 1 });
+        productListInCart.push({ ...store.product, numberInCart: quantity });
       }
 
       sessionStorage.setItem('ProductListInCart', JSON.stringify(productListInCart));
     }
 
-    numberProductsInCart += 1;
+    numberProductsInCart += quantity;
 
     appContext.dispatch({
       type: 'updateNumberProductsInCart',

@@ -42,6 +42,22 @@ function App() {
         productListInCart: productListInCart
       }
     });
+
+    const isRememberMe = localStorage.getItem('isRememberMe');
+    let customer = {};
+    if (isRememberMe === 'true') {
+      customer = JSON.parse(localStorage.getItem('customer'));
+    } else if (isRememberMe === null || isRememberMe === 'false') {
+      customer = JSON.parse(sessionStorage.getItem('customer'));
+    }
+    if (customer !== null) {
+      dispatch({
+        type: 'updateCustomer',
+        payload: {
+          customer: customer
+        }
+      });
+    }
   }, []);
 
   return (

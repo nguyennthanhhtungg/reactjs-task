@@ -10,7 +10,7 @@ import { axiosInstance } from '../../utils/database';
 import Slide from '@material-ui/core/Slide';
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
-import Context from '../../contexts/appContext';
+import AppContext from '../../contexts/appContext';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LogInComponent() {
   const classes = useStyles();
   const history = useHistory();
-  const { dispatch } = useContext(Context);
+  const { dispatch } = useContext(AppContext);
 
   const [isRememberMe, setIsRememberMe] = useState(false);
   const [snackbar, setSnackbar] = useState({
@@ -88,7 +88,11 @@ export default function LogInComponent() {
       });
 
       await new Promise((resolve) => setTimeout(resolve, 3000));
-      localStorage.setItem('customer', JSON.stringify(res.data));
+      if (isRememberMe === true) {
+        localStorage.setItem('customer', JSON.stringify(res.data));
+      } else {
+        sessionStorage.setItem('customer', JSON.stringify(res.data));
+      }
 
       dispatch({
         type: 'updateCustomer',
@@ -107,7 +111,7 @@ export default function LogInComponent() {
 
       if (err.response.data.Message === 'This account has not been verified yet!') {
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        localStorage.setItem('email', data.email);
+        sessionStorage.setItem('email', data.email);
         history.push('/verification');
       }
     }

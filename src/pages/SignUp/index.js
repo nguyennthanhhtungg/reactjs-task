@@ -81,7 +81,7 @@ export default function SignUp() {
   const onSubmit = async (data) => {
     try {
       const res = await axiosInstance.post('/auth/register', data);
-      localStorage.setItem('email', res.data.email);
+      sessionStorage.setItem('email', res.data.email);
       // localStorage.setItem('customer', JSON.stringify(res.data));
       history.push('/verification');
     } catch (err) {

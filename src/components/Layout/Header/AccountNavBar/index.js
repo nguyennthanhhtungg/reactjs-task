@@ -1,6 +1,6 @@
 import React from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Popover from '@material-ui/core/Popover';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AccountNavBar({ customer }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const history = useHistory();
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -46,6 +47,14 @@ export default function AccountNavBar({ customer }) {
   };
 
   const open = Boolean(anchorEl);
+
+  const handleLogOut = () => {
+    localStorage.removeItem('isRememberMe');
+    localStorage.removeItem('customer');
+    sessionStorage.removeItem('customer');
+
+    location.reload();
+  };
 
   return (
     <div onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
@@ -83,7 +92,7 @@ export default function AccountNavBar({ customer }) {
           <Link to="/orders" className={classes.subMenu}>
             My Orders
           </Link>
-          <Link to="/logout" className={classes.subMenu}>
+          <Link onClick={handleLogOut} className={classes.subMenu}>
             Log Out
           </Link>
         </div>

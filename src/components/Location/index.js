@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import AppContext from '../../contexts/appContext';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles(() => ({
 
 export default function Location() {
   const classes = useStyles();
+  const { store } = useContext(AppContext);
 
   return (
     <div className={classes.root}>
@@ -40,24 +42,30 @@ export default function Location() {
         </Link>
       </div>
       <hr />
-      <div style={{ marginBottom: 5 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={7} className={classes.gridLeft}>
-            <Typography variant="subtitle2" style={{ fontWeight: 'bolder' }}>
-              Nguyễn Thanh Tùng
-            </Typography>
-          </Grid>
-          <Grid item xs={5} className={classes.gridRight}>
-            <Typography variant="subtitle2" style={{ fontWeight: 'bolder' }}>
-              0868034705
-            </Typography>
-          </Grid>
-        </Grid>
-      </div>
-      <div style={{ color: 'gray' }}>
-        34/5 hẻm 05, đường Lê Hồng Phong, khu phố 1, Phường Hòa Phú, Thành phố Thủ
-        Dầu Một, Bình Dương
-      </div>
+      {store.customer.customerName !== undefined ? (
+        <>
+          <div style={{ marginBottom: 5 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={7} className={classes.gridLeft}>
+                <Typography variant="subtitle2" style={{ fontWeight: 'bolder' }}>
+                  {store.customer.customerName}
+                </Typography>
+              </Grid>
+              <Grid item xs={5} className={classes.gridRight}>
+                <Typography variant="subtitle2" style={{ fontWeight: 'bolder' }}>
+                  {store.customer.phoneNumber}
+                </Typography>
+              </Grid>
+            </Grid>
+          </div>
+          <div style={{ color: 'gray' }}>
+            34/5 hẻm 05, đường Lê Hồng Phong, khu phố 1, Phường Hòa Phú, Thành phố
+            Thủ Dầu Một, Bình Dương
+          </div>
+        </>
+      ) : (
+        <Typography style={{ textAlign: 'center' }}>Not Logged In</Typography>
+      )}
     </div>
   );
 }
