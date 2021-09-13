@@ -104,11 +104,10 @@ export default function Verification(props) {
 
   const resendOTPCodeHandler = async () => {
     setIsDisableSend(true);
+    setTimeOut(60);
 
     try {
       const res = await axiosInstance.get(`/auth/sendOTPCode?email=${email}`);
-
-      setTimeOut(60);
 
       setSnackbar({
         open: true,
