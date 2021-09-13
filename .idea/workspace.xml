@@ -21,18 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9ad70d15-fbce-4e93-8e59-6599e28e2216" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GeneralProductInformation/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GeneralProductInformation/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Layout/Header/AccountNavBar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Layout/Header/AccountNavBar/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Location/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Location/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LogInComponent/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LogInComponent/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OrderSummary/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderSummary/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Cart/cartContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Cart/cartContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Cart/cartReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Cart/cartReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Cart/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Cart/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/SignUp/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/SignUp/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Verification/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Verification/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -120,7 +108,8 @@
       <workItem from="1631439213904" duration="14000" />
       <workItem from="1631439229909" duration="7299000" />
       <workItem from="1631462206553" duration="4320000" />
-      <workItem from="1631498905978" duration="11936000" />
+      <workItem from="1631498905978" duration="13349000" />
+      <workItem from="1631523775240" duration="850000" />
     </task>
     <servers />
   </component>
@@ -156,10 +145,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738/1366.0.1366.738@0.0.1366.738" timestamp="1631439225952" />
-    <state x="273" y="28" key="SettingsEditor" timestamp="1631464182703">
+    <state x="273" y="28" key="SettingsEditor" timestamp="1631524639157">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="273" y="28" key="SettingsEditor/0.0.1366.738/1366.0.1366.738@0.0.1366.738" timestamp="1631464182703" />
+    <state x="273" y="28" key="SettingsEditor/0.0.1366.738/1366.0.1366.738@0.0.1366.738" timestamp="1631524639157" />
     <state x="500" y="283" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1631439505967">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
