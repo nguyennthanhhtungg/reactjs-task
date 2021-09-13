@@ -122,149 +122,147 @@ export default function Verification(props) {
         message: err.response.data.Message
       });
     }
-    useEffect(() => {
-      if (timeOut === 0) {
-        setIsDisableSend(false);
-        return;
-      }
-
-      window.setTimeout(() => {
-        setTimeOut(timeOut - 1);
-      }, 1000);
-    }, [timeOut]);
-
-    const handleChangeOTPCode = (e) => {
-      if (e.key >= '0' && e.key <= '9') {
-        setOTPCode(parseInt(OTPCode + e.key));
-      }
-
-      if (e.key === 'Backspace') {
-        setOTPCode(parseInt(OTPCode / 10));
-      }
-    };
-
-    const {
-      register,
-      handleSubmit,
-      watch,
-      formState: { errors }
-    } = useForm();
-    const onSubmit = async (data) => {
-      try {
-        const res = await axiosInstance.post(
-          `/auth/verifyTwoStepVerification`,
-          data
-        );
-        setSnackbar({
-          open: true,
-          severity: 'success',
-          message: res.data
-        });
-
-        await new Promise((resolve) => setTimeout(resolve, 3000));
-        history.push('/login');
-      } catch (err) {
-        setSnackbar({
-          open: true,
-          severity: 'error',
-          message: err.response.data.Message
-        });
-      }
-    };
-
-    // console.log(watch('example')); // watch input value by passing the name of it
-
-    return (
-      <>
-        <Helmet>
-          <title>Verification | React App</title>
-        </Helmet>
-
-        <Container maxWidth="sm" className={classes.root}>
-          {flag === false && (
-            <>
-              <Typography variant="h5">Security Verification</Typography>
-              <div className={classes.securityVerification}>
-                <img
-                  className={classes.securityLogo}
-                  src="https://laz-img-cdn.alicdn.com/tfs/TB1v0JvAmBYBeNjy0FeXXbnmFXa-300-300.png"
-                />
-                <Typography style={{ color: 'gray' }}>
-                  To protect your account security, we need to verify your identity
-                </Typography>
-                <Typography style={{ color: 'gray' }}>
-                  Please choose a way to verify:
-                </Typography>
-                <Button
-                  onClick={sendOTPCodeHandler}
-                  type="button"
-                  className={classes.verificationBtn}
-                >
-                  <MailOutlineIcon />
-                  Verify through Email Code
-                </Button>
-              </div>
-            </>
-          )}
-          {flag === true && (
-            <>
-              <Typography variant="h5">Email Verification</Typography>
-              <div className={classes.verification}>
-                <div style={{ display: 'flex' }}>
-                  <MailOutlineIcon />
-                  <Typography>
-                    We will send a one time Email code to your Email
-                  </Typography>
-                </div>
-                <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-                  <input
-                    placeholder="Please enter your phone number"
-                    defaultValue={email}
-                    readOnly={true}
-                    {...register('email', { required: true })}
-                    className={classes.input}
-                    required="true"
-                  />
-
-                  <input
-                    id="OTPCodeInput"
-                    placeholder="6 digits"
-                    type="number"
-                    onKeyDown={handleChangeOTPCode}
-                    value={OTPCode}
-                    {...register('otpCode', { required: true })}
-                    className={classes.codeInput}
-                    required="true"
-                  />
-
-                  <Button
-                    onClick={resendOTPCodeHandler}
-                    disabled={isDisableSend}
-                    className={classes.sendBtn}
-                  >
-                    Resend{timeOut !== 0 ? '(' + timeOut + ')' : ''}
-                  </Button>
-
-                  <Button type="submit" className={classes.verificationBtn}>
-                    Verify Code
-                  </Button>
-                </form>
-              </div>
-            </>
-          )}
-        </Container>
-        <Snackbar
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          open={snackbar.open}
-          autoHideDuration={3000}
-          TransitionComponent={Slide}
-          onClose={() => setSnackbar({ ...snackbar, open: false })}
-        >
-          <Alert variant="filled" severity={snackbar.severity}>
-            {snackbar.message}
-          </Alert>
-        </Snackbar>
-      </>
-    );
   };
+
+  useEffect(() => {
+    if (timeOut === 0) {
+      setIsDisableSend(false);
+      return;
+    }
+
+    window.setTimeout(() => {
+      setTimeOut(timeOut - 1);
+    }, 1000);
+  }, [timeOut]);
+
+  const handleChangeOTPCode = (e) => {
+    if (e.key >= '0' && e.key <= '9') {
+      setOTPCode(parseInt(OTPCode + e.key));
+    }
+
+    if (e.key === 'Backspace') {
+      setOTPCode(parseInt(OTPCode / 10));
+    }
+  };
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors }
+  } = useForm();
+  const onSubmit = async (data) => {
+    try {
+      const res = await axiosInstance.post(`/auth/verifyTwoStepVerification`, data);
+      setSnackbar({
+        open: true,
+        severity: 'success',
+        message: res.data
+      });
+
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      history.push('/login');
+    } catch (err) {
+      setSnackbar({
+        open: true,
+        severity: 'error',
+        message: err.response.data.Message
+      });
+    }
+  };
+
+  // console.log(watch('example')); // watch input value by passing the name of it
+
+  return (
+    <>
+      <Helmet>
+        <title>Verification | React App</title>
+      </Helmet>
+
+      <Container maxWidth="sm" className={classes.root}>
+        {flag === false && (
+          <>
+            <Typography variant="h5">Security Verification</Typography>
+            <div className={classes.securityVerification}>
+              <img
+                className={classes.securityLogo}
+                src="https://laz-img-cdn.alicdn.com/tfs/TB1v0JvAmBYBeNjy0FeXXbnmFXa-300-300.png"
+              />
+              <Typography style={{ color: 'gray' }}>
+                To protect your account security, we need to verify your identity
+              </Typography>
+              <Typography style={{ color: 'gray' }}>
+                Please choose a way to verify:
+              </Typography>
+              <Button
+                onClick={sendOTPCodeHandler}
+                type="button"
+                className={classes.verificationBtn}
+              >
+                <MailOutlineIcon />
+                Verify through Email Code
+              </Button>
+            </div>
+          </>
+        )}
+        {flag === true && (
+          <>
+            <Typography variant="h5">Email Verification</Typography>
+            <div className={classes.verification}>
+              <div style={{ display: 'flex' }}>
+                <MailOutlineIcon />
+                <Typography>
+                  We will send a one time Email code to your Email
+                </Typography>
+              </div>
+              <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+                <input
+                  placeholder="Please enter your phone number"
+                  defaultValue={email}
+                  readOnly={true}
+                  {...register('email', { required: true })}
+                  className={classes.input}
+                  required="true"
+                />
+
+                <input
+                  id="OTPCodeInput"
+                  placeholder="6 digits"
+                  type="number"
+                  onKeyDown={handleChangeOTPCode}
+                  value={OTPCode}
+                  {...register('otpCode', { required: true })}
+                  className={classes.codeInput}
+                  required="true"
+                />
+
+                <Button
+                  onClick={resendOTPCodeHandler}
+                  disabled={isDisableSend}
+                  className={classes.sendBtn}
+                >
+                  Resend{timeOut !== 0 ? '(' + timeOut + ')' : ''}
+                </Button>
+
+                <Button type="submit" className={classes.verificationBtn}>
+                  Verify Code
+                </Button>
+              </form>
+            </div>
+          </>
+        )}
+      </Container>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        open={snackbar.open}
+        autoHideDuration={3000}
+        TransitionComponent={Slide}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+      >
+        <Alert variant="filled" severity={snackbar.severity}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </>
+  );
 }

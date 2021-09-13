@@ -120,6 +120,20 @@ export default function Cart() {
 
       await axiosInstance.post(`/Orders`, data);
 
+      appContext.dispatch({
+        type: 'updateProductListInCart',
+        payload: {
+          productListInCart: []
+        }
+      });
+
+      appContext.dispatch({
+        type: 'updateNumberProductsInCart',
+        payload: {
+          numberProductsInCart: 0
+        }
+      });
+
       mySwal.PlaceOrder();
       await new Promise((resolve) => setTimeout(resolve, 3000));
 
