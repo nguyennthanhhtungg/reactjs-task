@@ -97,9 +97,9 @@ export default function Verification(props) {
     setEmail(email);
   }, []);
 
-  const sendOTPCodeHandler = () => {
+  const sendOTPCodeHandler = async () => {
     setFlag(true);
-    resendOTPCodeHandler();
+    await resendOTPCodeHandler();
   };
 
   const resendOTPCodeHandler = async () => {
