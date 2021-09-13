@@ -97,6 +97,17 @@ export default function Verification(props) {
     setEmail(email);
   }, []);
 
+  useEffect(() => {
+    if (timeOut === 0) {
+      setIsDisableSend(false);
+      return;
+    }
+
+    window.setTimeout(() => {
+      setTimeOut(timeOut - 1);
+    }, 1000);
+  }, [timeOut]);
+
   const sendOTPCodeHandler = async () => {
     setFlag(true);
     await resendOTPCodeHandler();
@@ -122,17 +133,6 @@ export default function Verification(props) {
       });
     }
   };
-
-  useEffect(() => {
-    if (timeOut === 0) {
-      setIsDisableSend(false);
-      return;
-    }
-
-    window.setTimeout(() => {
-      setTimeOut(timeOut - 1);
-    }, 1000);
-  }, [timeOut]);
 
   const handleChangeOTPCode = (e) => {
     if (e.key >= '0' && e.key <= '9') {
