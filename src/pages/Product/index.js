@@ -16,6 +16,7 @@ import { axiosInstance } from '../../utils/database';
 import ProductContext from './productContext';
 import reducer from './productReducer';
 import Helmet from 'react-helmet';
+import Comment from '../../components/Comment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -154,6 +155,7 @@ export default function Product({ props }) {
         <SimilarProductList />
         <ProductDesctiption />
         <ProductDetails />
+        <Comment />
         <YourBrowsingHistory />
       </Container>
     </ProductContext.Provider>
