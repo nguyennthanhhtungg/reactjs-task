@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Item(props) {
+export default function Item({ comment }) {
   const classes = useStyles();
 
   return (
@@ -23,12 +23,14 @@ export default function Item(props) {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Avatar />
         <div style={{ marginLeft: 10, marginRight: 'auto' }}>
-          <Typography style={{ fontWeight: 'bolder' }}>Nguyễn Thanh Tùng</Typography>
-          <Rating defaultValue={2} size="small" readOnly />
+          <Typography style={{ fontWeight: 'bolder' }}>
+            {comment.customerName}
+          </Typography>
+          <Rating value={comment.rate} size="small" readOnly />
         </div>
-        <Typography style={{ color: 'gray' }}>14/09/2021</Typography>
+        <Typography style={{ color: 'gray' }}>{comment.createdDate}</Typography>
       </div>
-      <div style={{ marginLeft: 10 }}>Good Product!</div>
+      <div style={{ marginLeft: 10 }}>{parse(comment.review)}</div>
     </div>
   );
 }

@@ -69,7 +69,8 @@ const initialProductState = {
     tax: 0,
     image: {}
   },
-  similarProductList: []
+  similarProductList: [],
+  commentList: []
 };
 
 export default function Product({ props }) {

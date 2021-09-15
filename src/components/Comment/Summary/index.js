@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
@@ -7,6 +7,11 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import * as PropTypes from 'prop-types';
+import ProductContext from '../../../pages/Product/productContext';
+import {
+  calculateRatingAverage,
+  getRatingNumberByRating
+} from '../../../utils/rating';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +52,14 @@ LinearProgressWithLabel.propTypes = {
 
 export default function Summary(props) {
   const classes = useStyles();
+  const [ratingAverage, setRatingAverage] = useState(5);
+
+  const { store } = useContext(ProductContext);
+
+  useEffect(() => {
+    const average = calculateRatingAverage(store.commentList);
+    setRatingAverage(average);
+  }, [store.commentList]);
 
   return (
     <Grid container>
@@ -56,16 +69,56 @@ export default function Summary(props) {
           style={{ fontWeight: 'bolder' }}
           color="textSecondary"
         >
-          {4.9}/5
+          {ratingAverage}/5
         </Typography>
-        <Rating name="read-only" value={4.7} readOnly precision={0.1} />
+        <Rating name="read-only" value={ratingAverage} readOnly precision={0.1} />
       </Grid>
       <Grid item xs={3}>
-        <LinearProgressWithLabel rating={5} percentage={50} number={10} />
-        <LinearProgressWithLabel rating={4} percentage={40} number={9} />
-        <LinearProgressWithLabel rating={3} percentage={30} number={8} />
-        <LinearProgressWithLabel rating={2} percentage={20} number={7} />
-        <LinearProgressWithLabel rating={1} percentage={10} number={6} />
+        <LinearProgressWithLabel
+          rating={5}
+          percentage={
+            (getRatingNumberByRating(store.commentList, 5) /
+              store.commentList.length) *
+            100
+          }
+          number={getRatingNumberByRating(store.commentList, 5)}
+        />
+        <LinearProgressWithLabel
+          rating={4}
+          percentage={
+            (getRatingNumberByRating(store.commentList, 4) /
+              store.commentList.length) *
+            100
+          }
+          number={getRatingNumberByRating(store.commentList, 4)}
+        />
+        <LinearProgressWithLabel
+          rating={3}
+          percentage={
+            (getRatingNumberByRating(store.commentList, 3) /
+              store.commentList.length) *
+            100
+          }
+          number={getRatingNumberByRating(store.commentList, 3)}
+        />
+        <LinearProgressWithLabel
+          rating={2}
+          percentage={
+            (getRatingNumberByRating(store.commentList, 2) /
+              store.commentList.length) *
+            100
+          }
+          number={getRatingNumberByRating(store.commentList, 2)}
+        />
+        <LinearProgressWithLabel
+          rating={1}
+          percentage={
+            (getRatingNumberByRating(store.commentList, 1) /
+              store.commentList.length) *
+            100
+          }
+          number={getRatingNumberByRating(store.commentList, 1)}
+        />
       </Grid>
     </Grid>
   );

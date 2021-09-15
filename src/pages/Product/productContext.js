@@ -32,7 +32,8 @@ const defaultValue = {
     tax: 0,
     image: {}
   },
-  similarProductList: []
+  similarProductList: [],
+  commentList: []
 };
 const ProductContext = createContext(defaultValue);
 

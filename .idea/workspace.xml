@@ -20,14 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ad70d15-fbce-4e93-8e59-6599e28e2216" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Comment/Item/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Comment/Summary/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Comment/YourComment/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Comment/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/rating.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Comment/Item/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comment/Item/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Comment/Summary/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comment/Summary/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Comment/YourComment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comment/YourComment/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Comment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comment/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LogIn/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LogIn/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Product/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Product/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Product/productContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Product/productContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Product/productReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Product/productReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +121,8 @@
       <workItem from="1631498905978" duration="13349000" />
       <workItem from="1631523775240" duration="5532000" />
       <workItem from="1631533439248" duration="21000" />
-      <workItem from="1631587018423" duration="15661000" />
+      <workItem from="1631587018423" duration="15791000" />
+      <workItem from="1631672351358" duration="16263000" />
     </task>
     <servers />
   </component>
@@ -169,10 +174,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="390" y="102" width="585" height="534" key="find.popup/0.0.1366.738/1366.0.1366.738@0.0.1366.738" timestamp="1631447014844" />
-    <state x="339" y="165" key="run.anything.popup" timestamp="1631439515758">
+    <state x="339" y="165" key="run.anything.popup" timestamp="1631675551064">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="339" y="165" key="run.anything.popup/0.0.1366.738/1366.0.1366.738@0.0.1366.738" timestamp="1631439515758" />
+    <state x="339" y="165" key="run.anything.popup/0.0.1366.738/1366.0.1366.738@0.0.1366.738" timestamp="1631675551064" />
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1631267830020">
       <screen x="0" y="0" width="1366" height="738" />
     </state>

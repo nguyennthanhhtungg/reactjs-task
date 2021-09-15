@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function LogIn() {
+export default function LogIn(props) {
   const classes = useStyles();
 
   return (
