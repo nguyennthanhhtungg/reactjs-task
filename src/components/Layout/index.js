@@ -12,6 +12,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Context from '../../contexts/appContext';
 import reducer from '../../reducers/appReducer';
+import SnackbarProvider from '../SnackbarProvider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,6 +69,7 @@ export default function Layout(props) {
           <ArrowUpwardIcon />
         </Fab>
       </ScrollTop>
+      <SnackbarProvider />
       <Footer />
     </React.Fragment>
   );

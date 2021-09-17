@@ -26,6 +26,12 @@ export default function reducer(state, action) {
         customer: action.payload.customer
       };
 
+    case 'updateSnackbar':
+      return {
+        ...state,
+        snackbar: action.payload.snackbar
+      };
+
     default:
       return state;
   }

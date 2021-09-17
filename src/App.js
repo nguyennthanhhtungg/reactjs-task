@@ -13,11 +13,17 @@ import Cart from './pages/Cart';
 import Layout from './components/Layout';
 import reducer from './reducers/appReducer';
 import Context from './contexts/appContext';
+import Customer from './pages/Customer';
 
 const initialState = {
   customer: {},
   numberProductsInCart: 0,
-  productListInCart: []
+  productListInCart: [],
+  snackbar: {
+    open: false,
+    severity: '',
+    message: ''
+  }
 };
 
 function App() {
@@ -90,6 +96,7 @@ function App() {
               <Route exact path="/cart">
                 <Cart />
               </Route>
+              <Route path="/customer" component={Customer} />
             </Switch>
           </Layout>
         </Context.Provider>

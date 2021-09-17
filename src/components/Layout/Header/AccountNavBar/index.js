@@ -59,7 +59,7 @@ export default function AccountNavBar({ customer }) {
   return (
     <div onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
       <Link
-        to="/account"
+        to="/customer/account/profile"
         aria-owns={open ? 'mouse-over-popover' : undefined}
         aria-haspopup="true"
         className={classes.menu}
@@ -86,10 +86,10 @@ export default function AccountNavBar({ customer }) {
         disableRestoreFocus
       >
         <div>
-          <Link to="/account" className={classes.subMenu}>
+          <Link to="/customer/account/profile" className={classes.subMenu}>
             My Account
           </Link>
-          <Link to="/orders" className={classes.subMenu}>
+          <Link to="/customer/order" className={classes.subMenu}>
             My Orders
           </Link>
           <Link onClick={handleLogOut} className={classes.subMenu}>

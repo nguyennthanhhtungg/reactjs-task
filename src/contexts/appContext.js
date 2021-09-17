@@ -3,7 +3,12 @@ import { createContext } from 'react';
 const defaultValue = {
   customer: {},
   numberProductsInCart: 0,
-  productListInCart: []
+  productListInCart: [],
+  snackbar: {
+    open: false,
+    severity: '',
+    message: ''
+  }
 };
 
 const AppContext = createContext(defaultValue);
