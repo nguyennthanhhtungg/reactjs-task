@@ -3,13 +3,12 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Container, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
-import Layout from '../../components/Layout';
 import Helmet from 'react-helmet';
-import ProductCard from '../../components/ProductCard';
 import Carousel from '../../components/Carousel';
-import reducer from '../Product/productReducer';
+import reducer from './promotionReducer';
 import { axiosInstance } from '../../utils/database';
 import PromotionProductListGroupCategory from '../../components/PromotionProductListGroupCategory';
+import PromotionContext from './promotionContext';
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -81,7 +80,7 @@ export default function Promotion() {
     }
 
     loadInit();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -93,16 +92,18 @@ export default function Promotion() {
           <img key={bannerAdvertising.id} src={bannerAdvertising.url} />
         ))}
       </Carousel>
-      <Container maxWidth="lg">
-        {store.categoryList.map((category) => {
-          return (
-            <PromotionProductListGroupCategory
-              key={category.categoryId}
-              category={category}
-            />
-          );
-        })}
-      </Container>
+      <PromotionContext.Provider value={{ store, dispatch }}>
+        <Container maxWidth="lg">
+          {store.categoryList.map((category) => {
+            return (
+              <PromotionProductListGroupCategory
+                key={category.categoryId}
+                category={category}
+              />
+            );
+          })}
+        </Container>
+      </PromotionContext.Provider>
     </>
   );
 }
