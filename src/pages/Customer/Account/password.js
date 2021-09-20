@@ -65,40 +65,40 @@ export default function Password() {
           }
         }
       });
-    }
+    } else {
+      try {
+        const res = await axiosInstance.post(`/auth/changepassword`, {
+          userId: store.customer.customerId,
+          oldPassword: data.oldPassword,
+          newPassword: data.newPassword
+        });
 
-    try {
-      const res = await axiosInstance.post(`/auth/changepassword`, {
-        userId: store.customer.customerId,
-        oldPassword: data.oldPassword,
-        newPassword: data.newPassword
-      });
+        if (res.status === 200) {
+          reset();
 
-      if (res.status === 200) {
-        reset();
-
+          dispatch({
+            type: 'updateSnackbar',
+            payload: {
+              snackbar: {
+                open: true,
+                severity: 'success',
+                message: 'Update Password Successfully!'
+              }
+            }
+          });
+        }
+      } catch (err) {
         dispatch({
           type: 'updateSnackbar',
           payload: {
             snackbar: {
               open: true,
-              severity: 'success',
-              message: 'Update Password Successfully!'
+              severity: 'error',
+              message: err.response.data.Message
             }
           }
         });
       }
-    } catch (err) {
-      dispatch({
-        type: 'updateSnackbar',
-        payload: {
-          snackbar: {
-            open: true,
-            severity: 'error',
-            message: err.response.data.Message
-          }
-        }
-      });
     }
   };
 

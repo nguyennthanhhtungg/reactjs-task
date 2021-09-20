@@ -20,14 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ad70d15-fbce-4e93-8e59-6599e28e2216" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/customerContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Customer/customerReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OrderItem/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderItem/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Cart/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Cart/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Order/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Order/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Customer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Account/password.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Account/password.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +117,7 @@
       <workItem from="1631845476954" duration="4006000" />
       <workItem from="1631858324499" duration="16325000" />
       <workItem from="1632060068897" duration="4210000" />
-      <workItem from="1632103665589" duration="7678000" />
+      <workItem from="1632103665589" duration="8548000" />
     </task>
     <servers />
   </component>
