@@ -18,12 +18,6 @@ import AppContext from '../../contexts/appContext';
 import reducer from '../Cart/cartReducer';
 import CartContext from './cartContext';
 import { axiosInstance } from '../../utils/database';
-import Transition from 'react-transition-group/Transition';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogActions from '@material-ui/core/DialogActions';
-import Dialog from '@material-ui/core/Dialog';
 
 const useStyles = makeStyles((theme) => ({
   root: {

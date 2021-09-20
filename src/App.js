@@ -1,6 +1,6 @@
 import './App.css';
-import React, { useEffect, useReducer } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useContext, useEffect, useReducer } from 'react';
+import { BrowserRouter as Router, Redirect, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
@@ -12,8 +12,8 @@ import Products from './pages/Products';
 import Cart from './pages/Cart';
 import Layout from './components/Layout';
 import reducer from './reducers/appReducer';
-import Context from './contexts/appContext';
 import Customer from './pages/Customer';
+import AppContext from './contexts/appContext';
 
 const initialState = {
   customer: {},
@@ -69,7 +69,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop>
-        <Context.Provider value={{ store, dispatch }}>
+        <AppContext.Provider value={{ store, dispatch }}>
           <Layout>
             <Switch>
               <Route exact path="/">
@@ -96,12 +96,35 @@ function App() {
               <Route exact path="/cart">
                 <Cart />
               </Route>
-              <Route path="/customer" component={Customer} />
+              <PrivateRoute path="/customer">
+                <Customer />
+              </PrivateRoute>
             </Switch>
           </Layout>
-        </Context.Provider>
+        </AppContext.Provider>
       </ScrollToTop>
     </Router>
+  );
+}
+
+function PrivateRoute({ children, path, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      path={path}
+      component={() =>
+        localStorage.customer || sessionStorage.customer ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login'
+              // state: { from: location }
+            }}
+          />
+        )
+      }
+    />
   );
 }
 

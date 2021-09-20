@@ -32,6 +32,9 @@ import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import Notification from './Notification';
 import Voucher from './Voucher';
 import AppContext from '../../contexts/appContext';
+import reducer from './customerReducer';
+import CustomerContext from './customerContext';
+import { axiosInstance } from '../../utils/database';
 
 const useTreeItemStyles = makeStyles({
   root: {
@@ -109,31 +112,55 @@ const useStyles = makeStyles({
   }
 });
 
+const initialCustomerState = {
+  myOrders: []
+};
+
 export default function Customer(props) {
   const classes = useStyles();
   const history = useHistory();
+  const [store, dispatch] = useReducer(reducer, initialCustomerState);
+  const appContext = useContext(AppContext);
 
-  const { store } = useContext(AppContext);
+  console.log(props);
 
   if (
-    props.location.pathname === '/customer' ||
-    props.location.pathname === '/customer/account'
+    location.pathname === '/customer' ||
+    location.pathname === '/customer/account'
   ) {
     history.push('/customer/account/profile');
   }
 
+  useEffect(() => {
+    async function loadInitialData() {
+      const res = await axiosInstance.get(
+        `/Orders/OrderListByCustomerId?customerId=${appContext.store.customer.customerId}`
+      );
+
+      if (res.status === 200) {
+        dispatch({
+          type: 'updateMyOrders',
+          payload: {
+            myOrders: res.data
+          }
+        });
+      }
+    }
+    loadInitialData();
+  }, [appContext.store.customer, dispatch]);
+
   return (
     <>
       <Helmet>
-        <title>{`${store.customer.customerName} | React App`}</title>
+        <title>{`${appContext.store.customer.customerName} | React App`}</title>
       </Helmet>
       <Grid container spacing={1} className={classes.root}>
         <Grid item xs={3}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Avatar src={store.customer.avatarUrl} />
+            <Avatar src={appContext.store.customer.avatarUrl} />
             <div style={{ marginLeft: 10 }}>
               <Typography style={{ fontWeight: 'bolder' }}>
-                {store.customer.customerName}
+                {appContext.store.customer.customerName}
               </Typography>
               <Link
                 to="/customer/account/profile"
@@ -155,28 +182,28 @@ export default function Customer(props) {
               labelText="My Account"
               labelIcon={PersonIcon}
               isMainTitle={true}
-              currentPath={props.location.pathname}
+              currentPath={location.pathname}
               toPath="/customer/account/profile"
             >
               <StyledTreeItem
                 nodeId="2"
                 labelText="My Profile"
                 labelIcon={AccountCircleIcon}
-                currentPath={props.location.pathname}
+                currentPath={location.pathname}
                 toPath="/customer/account/profile"
               />
               <StyledTreeItem
                 nodeId="3"
                 labelText="My Payment Options"
                 labelIcon={PaymentIcon}
-                currentPath={props.location.pathname}
+                currentPath={location.pathname}
                 toPath="/customer/account/payment"
               />
               <StyledTreeItem
                 nodeId="5"
                 labelText="Change Password"
                 labelIcon={VpnKeyIcon}
-                currentPath={props.location.pathname}
+                currentPath={location.pathname}
                 toPath="/customer/account/password"
               />
             </StyledTreeItem>
@@ -185,7 +212,7 @@ export default function Customer(props) {
               labelText="My Orders"
               labelIcon={ReceiptIcon}
               isMainTitle={true}
-              currentPath={props.location.pathname}
+              currentPath={location.pathname}
               toPath="/customer/order"
             />
             <StyledTreeItem
@@ -193,7 +220,7 @@ export default function Customer(props) {
               labelText="Notification"
               labelIcon={NotificationsActiveIcon}
               isMainTitle={true}
-              currentPath={props.location.pathname}
+              currentPath={location.pathname}
               toPath="/customer/notification"
             />
             <StyledTreeItem
@@ -201,18 +228,20 @@ export default function Customer(props) {
               labelText="My Vouchers"
               labelIcon={LoyaltyIcon}
               isMainTitle={true}
-              currentPath={props.location.pathname}
+              currentPath={location.pathname}
               toPath="/customer/voucher"
             />
           </TreeView>
         </Grid>
         <Grid item xs={9}>
-          {props.location.pathname === '/customer/account/profile' && <Profile />}
-          {props.location.pathname === '/customer/account/payment' && <Payment />}
-          {props.location.pathname === '/customer/account/password' && <Password />}
-          {props.location.pathname === '/customer/order' && <Order />}
-          {props.location.pathname === '/customer/notification' && <Notification />}
-          {props.location.pathname === '/customer/voucher' && <Voucher />}
+          <CustomerContext.Provider value={{ store, dispatch }}>
+            {location.pathname === '/customer/account/profile' && <Profile />}
+            {location.pathname === '/customer/account/payment' && <Payment />}
+            {location.pathname === '/customer/account/password' && <Password />}
+            {location.pathname === '/customer/order' && <Order />}
+            {location.pathname === '/customer/notification' && <Notification />}
+            {location.pathname === '/customer/voucher' && <Voucher />}
+          </CustomerContext.Provider>
         </Grid>
       </Grid>
     </>

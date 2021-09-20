@@ -7,6 +7,7 @@ import { numberWithCommas } from '../../utils/currency';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
   root: {
@@ -41,7 +42,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function OrderItem() {
+export default function OrderItem({ order }) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -52,22 +53,22 @@ export default function OrderItem() {
           variant="subtitle1"
           style={{ fontWeight: 'bolder', marginRight: 'auto' }}
         >
-          No: ABC123 (3 Products)
+          No: {order.orderNo} ({order.totalProduct} Product(s))
         </Typography>
         <Divider orientation="vertical" flexItem />
         <Typography
           variant="subtitle1"
           style={{ fontWeight: 'bolder', color: 'orange' }}
         >
-          NEW
+          {order.status.toUpperCase()}
         </Typography>
       </div>
       <Divider />
-      {[...new Array(4)].map((index) => {
+      {order.orderDetails.map((orderDetail) => {
         return (
           <>
-            <div key={index} className={classes.productDIV}>
-              <img src="https://picsum.photos/200/200" style={{ width: '10%' }} />
+            <div key={orderDetail.id} className={classes.productDIV}>
+              <img src={orderDetail.product.imageUrl} style={{ width: '10%' }} />
               <div
                 style={{
                   marginLeft: 10,
@@ -76,25 +77,80 @@ export default function OrderItem() {
                   alignSelf: 'flex-start'
                 }}
               >
-                <Link to={`/product/1`} className={classes.productLink}>
-                  Smart Tivi Samsung 4K 50 inch 50TU6900asdasdasdasd asdasd asdas
-                  sada d wasd á
+                <Link
+                  to={`/product/${orderDetail.product.productId}`}
+                  className={classes.productLink}
+                >
+                  {orderDetail.product.productName}
                 </Link>
                 <Typography variant="subtitle1" style={{ color: 'gray' }}>
-                  Category Name
+                  {orderDetail.product.category.categoryName}
                 </Typography>
-                <Typography variant="subtitle1">x3</Typography>
+                <Typography variant="subtitle1">x{orderDetail.number}</Typography>
               </div>
-              <div className={classes.oldPrice}>{numberWithCommas(100000)}đ</div>
+              <div className={classes.oldPrice}>
+                {numberWithCommas(orderDetail.product.price)}đ
+              </div>
               <div className={classes.newPrice}>
-                {numberWithCommas(100000 * ((100 - 10) / 100))}đ
+                {numberWithCommas(
+                  orderDetail.product.price *
+                    ((100 - orderDetail.product.discount) / 100)
+                )}
+                đ
               </div>
             </div>
             <Divider />
           </>
         );
       })}
-      <div></div>
+      <Grid container alignItems="flex-end" style={{ marginTop: 10 }}>
+        <Grid item xs={8}>
+          <Typography style={{ color: 'gray' }}>
+            Create At:{' '}
+            <span style={{ textDecoration: 'underline' }}>{order.updatedDate}</span>
+          </Typography>
+        </Grid>
+        <Grid item xs={4}>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={6} style={{ textAlign: 'end' }}>
+              <Typography
+                variant="subtitle1"
+                style={{ fontSize: 'larger', fontWeight: 'bolder' }}
+              >
+                Delivery Fee:
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                variant="h6"
+                style={{ fontWeight: 'bolder', color: 'orange' }}
+              >
+                {numberWithCommas(order.deliveryFee)}đ
+              </Typography>
+            </Grid>
+            <Grid item xs={6} style={{ textAlign: 'end' }}>
+              <Typography
+                variant="subtitle1"
+                style={{ fontSize: 'larger', fontWeight: 'bolder' }}
+              >
+                Total:
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                variant="h6"
+                style={{ fontWeight: 'bolder', color: 'orange' }}
+              >
+                {numberWithCommas(order.totalProductMoney)}đ
+              </Typography>
+            </Grid>
+            <Grid item xs={6} style={{ textAlign: 'end' }}></Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2">(VAT included)</Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   );
 }
