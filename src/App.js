@@ -14,11 +14,14 @@ import Layout from './components/Layout';
 import reducer from './reducers/appReducer';
 import Customer from './pages/Customer';
 import AppContext from './contexts/appContext';
+import ConfirmCart from './pages/Cart/ConfirmCart';
 
 const initialState = {
   customer: {},
   numberProductsInCart: 0,
   productListInCart: [],
+  paymentMethod: 'cod',
+  deliveryAddressOption: 'address',
   snackbar: {
     open: false,
     severity: '',
@@ -30,6 +33,7 @@ function App() {
   const [store, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    console.log('Hello App');
     let productListInCart = JSON.parse(sessionStorage.getItem('ProductListInCart'));
     let numberProductsInCart = 0;
 
@@ -96,6 +100,9 @@ function App() {
               <Route exact path="/cart">
                 <Cart />
               </Route>
+              <PrivateRoute exact path="/cart/confirmCart">
+                <ConfirmCart />
+              </PrivateRoute>
               <PrivateRoute path="/customer">
                 <Customer />
               </PrivateRoute>

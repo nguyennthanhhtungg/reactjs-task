@@ -172,9 +172,10 @@ export default function Profile() {
                 </Grid>
                 <Grid item xs={9}>
                   <input
-                    defaultValue={store.customer.phoneNumber}
+                    defaultValue={parseInt(store.customer.phoneNumber)}
                     {...register('phoneNumber', { required: true })}
-                    className={classes.input}
+                    className={`${classes.input} numberInput`}
+                    type="number"
                     required
                   />
                 </Grid>

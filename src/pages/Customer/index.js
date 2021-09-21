@@ -122,8 +122,6 @@ export default function Customer(props) {
   const [store, dispatch] = useReducer(reducer, initialCustomerState);
   const appContext = useContext(AppContext);
 
-  console.log(props);
-
   if (
     location.pathname === '/customer' ||
     location.pathname === '/customer/account'

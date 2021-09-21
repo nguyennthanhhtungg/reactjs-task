@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LogInComponent() {
   const classes = useStyles();
   const history = useHistory();
-  const { dispatch } = useContext(AppContext);
+  const { store, dispatch } = useContext(AppContext);
 
   const [isRememberMe, setIsRememberMe] = useState(false);
   const [snackbar, setSnackbar] = useState({
@@ -86,21 +86,18 @@ export default function LogInComponent() {
         severity: 'success',
         message: 'Login successfully!'
       });
-
       await new Promise((resolve) => setTimeout(resolve, 3000));
       if (isRememberMe === true) {
         localStorage.setItem('customer', JSON.stringify(res.data));
       } else {
         sessionStorage.setItem('customer', JSON.stringify(res.data));
       }
-
       dispatch({
         type: 'updateCustomer',
         payload: {
           customer: res.data
         }
       });
-
       history.push('/');
     } catch (err) {
       setSnackbar({

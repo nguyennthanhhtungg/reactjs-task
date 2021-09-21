@@ -134,8 +134,9 @@ export default function SignUp() {
           <input
             placeholder="Enter your phone number"
             defaultValue=""
+            type="number"
             {...register('phoneNumber', { required: true })}
-            className={classes.input}
+            className={`${classes.input} numberInput`}
             required={true}
           />
 

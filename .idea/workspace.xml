@@ -20,9 +20,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ad70d15-fbce-4e93-8e59-6599e28e2216" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/pages/Cart/ConfirmCart/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Promotion/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Promotion/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Promotion/promotionReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Promotion/promotionReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/GeneralProductInformation/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GeneralProductInformation/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Layout/Footer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Layout/Footer/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Layout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Layout/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Location/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Location/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LogInComponent/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LogInComponent/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OrderSummary/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrderSummary/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PaymentMethod/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PaymentMethod/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ProductListInCart/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProductListInCart/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contexts/appContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/contexts/appContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Cart/cartContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Cart/cartContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Cart/cartReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Cart/cartReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Cart/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Cart/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/Account/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/Account/profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Customer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Customer/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/SignUp/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/SignUp/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Verification/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Verification/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/appReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/appReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/currency.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/currency.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +139,8 @@
       <workItem from="1631845476954" duration="4006000" />
       <workItem from="1631858324499" duration="16325000" />
       <workItem from="1632060068897" duration="4210000" />
-      <workItem from="1632103665589" duration="11391000" />
+      <workItem from="1632103665589" duration="16375000" />
+      <workItem from="1632190081074" duration="33384000" />
     </task>
     <servers />
   </component>

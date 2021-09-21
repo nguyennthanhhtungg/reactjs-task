@@ -18,6 +18,7 @@ import AppContext from '../../contexts/appContext';
 import reducer from '../Cart/cartReducer';
 import CartContext from './cartContext';
 import { axiosInstance } from '../../utils/database';
+import { calculateSubTotal } from '../../utils/currency';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,21 +49,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const initialCartState = {
-  subTotal: 0
-};
+const initialCartState = {};
 
 export default function Cart() {
   const classes = useStyles();
   const history = useHistory();
   const [isProductExisted, setIsProductExisted] = useState(false);
   const [store, dispatch] = useReducer(reducer, initialCartState);
-  const appContext = useContext(AppContext);
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    severity: '',
-    message: ''
-  });
 
   useEffect(() => {
     const productListInCart = JSON.parse(
@@ -74,72 +67,8 @@ export default function Cart() {
     }
   }, []);
 
-  useEffect(() => {
-    let subTotal = 0;
-
-    appContext.store.productListInCart.forEach((product) => {
-      subTotal +=
-        parseFloat(product.price) *
-        ((100 - product.discount) / 100) *
-        parseInt(product.numberInCart);
-    });
-
-    dispatch({
-      type: 'updateSubTotal',
-      payload: {
-        subTotal: subTotal
-      }
-    });
-  }, [appContext.store.numberProductsInCart]);
-
-  const handlePlaceOrder = async () => {
-    try {
-      if (appContext.store.customer.customerId === undefined) {
-        history.push('login');
-      }
-
-      const data = {
-        orderNo: 'ABC123',
-        customerId: appContext.store.customer.customerId,
-        totalProductMoney: store.subTotal,
-        totalProduct: appContext.store.numberProductsInCart,
-        status: 'New',
-        orderDetails: appContext.store.productListInCart.map((product) => {
-          return {
-            productId: product.productId,
-            number: product.numberInCart
-          };
-        })
-      };
-
-      await axiosInstance.post(`/Orders`, data);
-
-      appContext.dispatch({
-        type: 'updateProductListInCart',
-        payload: {
-          productListInCart: []
-        }
-      });
-
-      appContext.dispatch({
-        type: 'updateNumberProductsInCart',
-        payload: {
-          numberProductsInCart: 0
-        }
-      });
-
-      mySwal.PlaceOrder();
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-
-      sessionStorage.removeItem('ProductListInCart');
-      history.push('/');
-    } catch (err) {
-      setSnackbar({
-        open: true,
-        severity: 'error',
-        message: err.response.data.Message
-      });
-    }
+  const handleConfirmCart = () => {
+    history.push('/cart/confirmCart');
   };
 
   const handleShoppingNow = () => {
@@ -161,9 +90,9 @@ export default function Cart() {
                 <Button
                   className={classes.confirmCartBtn}
                   style={{ width: '50%' }}
-                  onClick={handlePlaceOrder}
+                  onClick={handleConfirmCart}
                 >
-                  PLACE ORDER
+                  CONFIRM CART
                 </Button>
               </Grid>
               <Grid item xs={3} className={classes.gridRight}>
@@ -173,9 +102,9 @@ export default function Cart() {
                 <Button
                   className={classes.confirmCartBtn}
                   style={{ width: '100%' }}
-                  onClick={handlePlaceOrder}
+                  onClick={handleConfirmCart}
                 >
-                  PLACE ORDER
+                  CONFIRM CART
                 </Button>
               </Grid>
             </Grid>
@@ -198,17 +127,6 @@ export default function Cart() {
           )}
         </Container>
       </CartContext.Provider>
-      <Snackbar
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        open={snackbar.open}
-        autoHideDuration={3000}
-        TransitionComponent={Slide}
-        onClose={() => setSnackbar({ ...snackbar, open: false })}
-      >
-        <Alert variant="filled" severity={snackbar.severity}>
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
     </>
   );
 }

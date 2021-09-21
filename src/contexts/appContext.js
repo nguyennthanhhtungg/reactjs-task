@@ -4,6 +4,8 @@ const defaultValue = {
   customer: {},
   numberProductsInCart: 0,
   productListInCart: [],
+  paymentMethod: 'cod',
+  deliveryAddressOption: 'address',
   snackbar: {
     open: false,
     severity: '',

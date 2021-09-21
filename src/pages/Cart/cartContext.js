@@ -1,8 +1,6 @@
 import { createContext } from 'react';
 
-const defaultValue = {
-  subTotal: 0
-};
+const defaultValue = {};
 const CartContext = createContext(defaultValue);
 
 export default CartContext;

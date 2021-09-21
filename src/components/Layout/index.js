@@ -10,8 +10,6 @@ import Zoom from '@material-ui/core/Zoom';
 
 import Header from './Header';
 import Footer from './Footer';
-import Context from '../../contexts/appContext';
-import reducer from '../../reducers/appReducer';
 import SnackbarProvider from '../SnackbarProvider';
 
 const useStyles = makeStyles((theme) => ({

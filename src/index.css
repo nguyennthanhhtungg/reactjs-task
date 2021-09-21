@@ -15,13 +15,13 @@ code {
 
 /* Hide the HTML5 Number Input’s Arrow Buttons */
 /* Chrome, Safari, Edge, Opera */
-#OTPCodeInput::-webkit-outer-spin-button,
-#OTPCodeInput::-webkit-inner-spin-button {
+.numberInput::-webkit-outer-spin-button,
+.numberInput::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* Firefox */
-#OTPCodeInput {
+.numberInput {
   -moz-appearance: textfield;
 }

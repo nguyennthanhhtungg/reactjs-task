@@ -32,6 +32,18 @@ export default function reducer(state, action) {
         snackbar: action.payload.snackbar
       };
 
+    case 'updatePaymentMethod':
+      return {
+        ...state,
+        paymentMethod: action.payload.paymentMethod
+      };
+
+    case 'updateDeliveryAddressOption':
+      return {
+        ...state,
+        deliveryAddressOption: action.payload.deliveryAddressOption
+      };
+
     default:
       return state;
   }

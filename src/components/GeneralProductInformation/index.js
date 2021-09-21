@@ -252,14 +252,16 @@ export default function ProductDetail() {
             <AddIcon fontSize="small" />
           </Button>
         </div>
-        <div style={{ marginTop: 10 }}>
-          <Button className={classes.addToCart} onClick={handleAddToCart}>
-            Add to Cart
-          </Button>
-          <Button className={classes.buyNow} onClick={handleBuyNow}>
-            Buy Now
-          </Button>
-        </div>
+        {store.product.productId !== 0 && (
+          <div style={{ marginTop: 10 }}>
+            <Button className={classes.addToCart} onClick={handleAddToCart}>
+              Add to Cart
+            </Button>
+            <Button className={classes.buyNow} onClick={handleBuyNow}>
+              Buy Now
+            </Button>
+          </div>
+        )}
       </Grid>
     </Grid>
   );

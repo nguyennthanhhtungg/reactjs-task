@@ -225,13 +225,13 @@ export default function Verification(props) {
                 />
 
                 <input
-                  id="OTPCodeInput"
+                  // id="OTPCodeInput"
                   placeholder="6 digits"
                   type="number"
                   onKeyDown={handleChangeOTPCode}
                   value={OTPCode}
                   {...register('otpCode', { required: true })}
-                  className={classes.codeInput}
+                  className={`${classes.codeInput} numberInput`}
                   required="true"
                 />
 

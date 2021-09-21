@@ -4,22 +4,13 @@ import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import AppContext from '../../contexts/appContext';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: 'white',
     padding: 10,
     marginBottom: 10
-  },
-  gridLeft: {
-    borderRightStyle: 'solid',
-    borderRightWidth: 1,
-    borderRightColor: 'black'
-  },
-  gridRight: {
-    borderLeftStyle: 'solid',
-    borderLeftWidth: 1,
-    borderLeftColor: 'black'
   }
 }));
 
@@ -37,31 +28,34 @@ export default function Location() {
         >
           Location
         </Typography>
-        <Link to="/changeLocation" style={{ textDecoration: 'none' }}>
+        <Link to="/customer/account/profile" style={{ textDecoration: 'none' }}>
           Change
         </Link>
       </div>
       <hr />
       {store.customer.customerName !== undefined ? (
         <>
-          <div style={{ marginBottom: 5 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={7} className={classes.gridLeft}>
-                <Typography variant="subtitle2" style={{ fontWeight: 'bolder' }}>
-                  {store.customer.customerName}
-                </Typography>
-              </Grid>
-              <Grid item xs={5} className={classes.gridRight}>
-                <Typography variant="subtitle2" style={{ fontWeight: 'bolder' }}>
-                  {store.customer.phoneNumber}
-                </Typography>
-              </Grid>
-            </Grid>
+          <div style={{ marginBottom: 5, display: 'flex' }}>
+            <Typography variant="subtitle2" style={{ fontWeight: 'bolder' }}>
+              {store.customer.customerName}
+            </Typography>
+            <Divider
+              orientation="vertical"
+              flexItem
+              style={{ marginLeft: 10, marginRight: 10, ontWeight: 'bolder' }}
+            />
+            <Typography variant="subtitle2" style={{ fontWeight: 'bolder' }}>
+              {store.customer.phoneNumber}
+            </Typography>
           </div>
-          <div style={{ color: 'gray' }}>
-            34/5 hẻm 05, đường Lê Hồng Phong, khu phố 1, Phường Hòa Phú, Thành phố
-            Thủ Dầu Một, Bình Dương
-          </div>
+          {store.customer.address !== '' ? (
+            <div style={{ color: 'gray' }}>
+              34/5 hẻm 05, đường Lê Hồng Phong, khu phố 1, Phường Hòa Phú, Thành phố
+              Thủ Dầu Một, Bình Dương
+            </div>
+          ) : (
+            <div style={{ color: 'gray', textAlign: 'center' }}>Unknown</div>
+          )}
         </>
       ) : (
         <Typography style={{ textAlign: 'center' }}>Not Logged In</Typography>

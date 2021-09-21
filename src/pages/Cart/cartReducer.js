@@ -4,12 +4,6 @@ export default function reducer(state, action) {
     case 'init':
       return action.payload;
 
-    case 'updateSubTotal':
-      return {
-        ...state,
-        subTotal: action.payload.subTotal
-      };
-
     default:
       return state;
   }

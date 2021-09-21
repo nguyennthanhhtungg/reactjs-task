@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, makeStyles, Typography } from '@material-ui/core';
 import AppContext from '../../contexts/appContext';
-import { numberWithCommas } from '../../utils/currency';
-import CartContext from '../../pages/Cart/cartContext';
+import { calculateSubTotal, numberWithCommas } from '../../utils/currency';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -14,7 +13,7 @@ const useStyles = makeStyles(() => ({
 
 export default function OrderSummary() {
   const classes = useStyles();
-  const { store, dispatch } = useContext(CartContext);
+  const appContext = useContext(AppContext);
 
   return (
     <div className={classes.root}>
@@ -32,7 +31,9 @@ export default function OrderSummary() {
         }}
       >
         <div style={{ color: 'gray' }}>Subtotal</div>
-        <div>{numberWithCommas(store.subTotal)}đ</div>
+        <div>
+          {numberWithCommas(calculateSubTotal(appContext.store.productListInCart))}đ
+        </div>
       </div>
       <div
         style={{
@@ -43,7 +44,11 @@ export default function OrderSummary() {
         }}
       >
         <div style={{ color: 'gray' }}>Shipping Fee</div>
-        <div>15,000đ</div>
+        <div>
+          {calculateSubTotal(appContext.store.productListInCart) >= 300000
+            ? 'Free'
+            : '15,000đ'}
+        </div>
       </div>
       <hr />
       <div
@@ -55,7 +60,12 @@ export default function OrderSummary() {
         }}
       >
         <div style={{ color: 'gray' }}>Total</div>
-        <div>{numberWithCommas(store.subTotal + 15000)}đ</div>
+        <div>
+          {numberWithCommas(
+            calculateSubTotal(appContext.store.productListInCart) + 15000
+          )}
+          đ
+        </div>
       </div>
       <div
         style={{

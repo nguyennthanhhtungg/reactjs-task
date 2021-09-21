@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    width: '100%',
     padding: theme.spacing(8),
     backgroundColor: '#d3e9f3'
   },
