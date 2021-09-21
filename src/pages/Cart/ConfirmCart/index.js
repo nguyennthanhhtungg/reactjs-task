@@ -91,55 +91,61 @@ export default function ConfirmCart() {
     });
   };
 
-  // const handlePlaceOrder = async () => {
-  //   try {
-  //     if (appContext.store.customer.customerId === undefined) {
-  //       history.push('login');
-  //     }
-  //
-  //     const data = {
-  //       orderNo: 'ABC123',
-  //       customerId: appContext.store.customer.customerId,
-  //       totalProductMoney: store.subTotal,
-  //       totalProduct: appContext.store.numberProductsInCart,
-  //       status: 'New',
-  //       orderDetails: appContext.store.productListInCart.map((product) => {
-  //         return {
-  //           productId: product.productId,
-  //           number: product.numberInCart
-  //         };
-  //       })
-  //     };
-  //
-  //     await axiosInstance.post(`/Orders`, data);
-  //
-  //     appContext.dispatch({
-  //       type: 'updateProductListInCart',
-  //       payload: {
-  //         productListInCart: []
-  //       }
-  //     });
-  //
-  //     appContext.dispatch({
-  //       type: 'updateNumberProductsInCart',
-  //       payload: {
-  //         numberProductsInCart: 0
-  //       }
-  //     });
-  //
-  //     mySwal.PlaceOrder();
-  //     await new Promise((resolve) => setTimeout(resolve, 3000));
-  //
-  //     sessionStorage.removeItem('ProductListInCart');
-  //     history.push('/');
-  //   } catch (err) {
-  //     setSnackbar({
-  //       open: true,
-  //       severity: 'error',
-  //       message: err.response.data.Message
-  //     });
-  //   }
-  // };
+  const handlePlaceOrder = async () => {
+    try {
+      const data = {
+        orderNo: 'ABC123',
+        customerId: appContext.store.customer.customerId,
+        totalProductMoney: calculateSubTotal(appContext.store.productListInCart),
+        totalProduct: appContext.store.numberProductsInCart,
+        status: 'New',
+        address:
+          appContext.store.deliveryAddressOption === 'address'
+            ? appContext.store.customer.address
+            : address,
+        paymentMethod: appContext.store.paymentMethod,
+        orderDetails: appContext.store.productListInCart.map((product) => {
+          return {
+            productId: product.productId,
+            number: product.numberInCart
+          };
+        })
+      };
+
+      await axiosInstance.post(`/Orders`, data);
+
+      appContext.dispatch({
+        type: 'updateProductListInCart',
+        payload: {
+          productListInCart: []
+        }
+      });
+
+      appContext.dispatch({
+        type: 'updateNumberProductsInCart',
+        payload: {
+          numberProductsInCart: 0
+        }
+      });
+
+      mySwal.PlaceOrder();
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      sessionStorage.removeItem('ProductListInCart');
+      history.push('/');
+    } catch (err) {
+      appContext.dispatch({
+        type: 'updateSnackbar',
+        payload: {
+          snackbar: {
+            open: true,
+            severity: 'error',
+            message: err.response.data.Message
+          }
+        }
+      });
+    }
+  };
 
   return (
     <>
@@ -345,7 +351,11 @@ export default function ConfirmCart() {
               >
                 BACK TO YOUR CART
               </Link>
-              <Button className={classes.proceedToPayment} size="large">
+              <Button
+                onClick={handlePlaceOrder}
+                className={classes.proceedToPayment}
+                size="large"
+              >
                 PROCEED TO PAYMENT
               </Button>
             </div>
