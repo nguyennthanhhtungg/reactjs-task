@@ -3,11 +3,12 @@ import { Link, useHistory } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Button, Divider, Typography } from '@material-ui/core';
-import { numberWithCommas } from '../../utils/currency';
+import { calculateSubTotal, numberWithCommas } from '../../utils/currency';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Grid from '@material-ui/core/Grid';
+import ProductInOrder from '../ProductInOrder';
 
 const useStyles = makeStyles({
   root: {
@@ -55,7 +56,17 @@ export default function OrderItem({ order }) {
         >
           No: {order.orderNo} ({order.totalProduct} Product(s))
         </Typography>
-        <Divider orientation="vertical" flexItem />
+        {/*<Link*/}
+        {/*  to={`/customer/orderDetail?orderId=${order.orderId}`}*/}
+        {/*  style={{ textDecoration: 'none' }}*/}
+        {/*>*/}
+        {/*  Order Detail*/}
+        {/*</Link>*/}
+        <Divider
+          orientation="vertical"
+          flexItem
+          style={{ marginLeft: 15, marginRight: 15 }}
+        />
         <Typography
           variant="subtitle1"
           style={{ fontWeight: 'bolder', color: 'orange' }}
@@ -67,90 +78,98 @@ export default function OrderItem({ order }) {
       {order.orderDetails.map((orderDetail) => {
         return (
           <>
-            <div key={orderDetail.id} className={classes.productDIV}>
-              <img src={orderDetail.product.imageUrl} style={{ width: '10%' }} />
-              <div
-                style={{
-                  marginLeft: 10,
-                  marginRight: 'auto',
-                  width: '50%',
-                  alignSelf: 'flex-start'
-                }}
-              >
-                <Link
-                  to={`/product/${orderDetail.product.productId}`}
-                  className={classes.productLink}
-                >
-                  {orderDetail.product.productName}
-                </Link>
-                <Typography variant="subtitle1" style={{ color: 'gray' }}>
-                  {orderDetail.product.category.categoryName}
-                </Typography>
-                <Typography variant="subtitle1">x{orderDetail.number}</Typography>
-              </div>
-              <div className={classes.oldPrice}>
-                {numberWithCommas(orderDetail.product.price)}đ
-              </div>
-              <div className={classes.newPrice}>
-                {numberWithCommas(
-                  orderDetail.product.price *
-                    ((100 - orderDetail.product.discount) / 100)
-                )}
-                đ
-              </div>
-            </div>
+            <ProductInOrder
+              product={orderDetail.product}
+              number={orderDetail.number}
+            />
             <Divider />
           </>
         );
       })}
-      <Grid container alignItems="flex-end" style={{ marginTop: 10 }}>
-        <Grid item xs={8}>
-          <Typography style={{ color: 'gray' }}>
+      <div style={{ marginTop: 10 }}>
+        <div style={{ display: 'flex', justifyContent: 'end' }}>
+          <Typography
+            variant="subtitle1"
+            style={{
+              fontSize: 'larger',
+              textAlign: 'end',
+              fontWeight: 'bolder'
+            }}
+          >
+            {`Subtotal (${order.totalProduct} items):`}
+          </Typography>
+          <Typography
+            variant="h6"
+            style={{
+              fontWeight: 'bolder',
+              color: 'orange',
+              width: '15%',
+              textAlign: 'end'
+            }}
+          >
+            {numberWithCommas(order.totalProductMoney)}đ
+          </Typography>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'end' }}>
+          <Typography
+            variant="subtitle1"
+            style={{
+              fontSize: 'larger',
+              textAlign: 'end',
+              fontWeight: 'bolder'
+            }}
+          >
+            Delivery Fee:
+          </Typography>
+          <Typography
+            variant="h6"
+            style={{
+              fontWeight: 'bolder',
+              color: 'orange',
+              width: '15%',
+              textAlign: 'end'
+            }}
+          >
+            {order.totalProductMoney >= 300000 ? 'Free' : '20,000đ'}
+          </Typography>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'end' }}>
+          <Typography
+            variant="subtitle1"
+            style={{
+              fontSize: 'larger',
+              textAlign: 'end',
+              fontWeight: 'bolder'
+            }}
+          >
+            Total:
+          </Typography>
+          <Typography
+            variant="h6"
+            style={{
+              fontWeight: 'bolder',
+              color: 'orange',
+              width: '15%',
+              textAlign: 'end'
+            }}
+          >
+            {numberWithCommas(
+              order.totalProductMoney +
+                (order.totalProductMoney >= 300000 ? 0 : 20000)
+            )}
+            đ
+          </Typography>
+        </div>
+        <div style={{ display: 'flex' }}>
+          <Typography style={{ color: 'gray', marginRight: 'auto' }}>
             Create At:{' '}
             <span style={{ textDecoration: 'underline' }}>{order.updatedDate}</span>
           </Typography>
-        </Grid>
-        <Grid item xs={4}>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item xs={6} style={{ textAlign: 'end' }}>
-              <Typography
-                variant="subtitle1"
-                style={{ fontSize: 'larger', fontWeight: 'bolder' }}
-              >
-                Delivery Fee:
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography
-                variant="h6"
-                style={{ fontWeight: 'bolder', color: 'orange' }}
-              >
-                {numberWithCommas(order.deliveryFee)}đ
-              </Typography>
-            </Grid>
-            <Grid item xs={6} style={{ textAlign: 'end' }}>
-              <Typography
-                variant="subtitle1"
-                style={{ fontSize: 'larger', fontWeight: 'bolder' }}
-              >
-                Total:
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography
-                variant="h6"
-                style={{ fontWeight: 'bolder', color: 'orange' }}
-              >
-                {numberWithCommas(order.totalProductMoney)}đ
-              </Typography>
-            </Grid>
-            <Grid item xs={6} style={{ textAlign: 'end' }}></Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2">(VAT included)</Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+          <Typography variant="body2" style={{ textAlign: 'end' }}>
+            (VAT included)
+          </Typography>
+        </div>
+      </div>
     </div>
   );
 }

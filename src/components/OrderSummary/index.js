@@ -30,7 +30,9 @@ export default function OrderSummary() {
           marginBottom: 5
         }}
       >
-        <div style={{ color: 'gray' }}>Subtotal</div>
+        <div
+          style={{ color: 'gray' }}
+        >{`Subtotal (${appContext.store.numberProductsInCart} items)`}</div>
         <div>
           {numberWithCommas(calculateSubTotal(appContext.store.productListInCart))}đ
         </div>
@@ -47,7 +49,7 @@ export default function OrderSummary() {
         <div>
           {calculateSubTotal(appContext.store.productListInCart) >= 300000
             ? 'Free'
-            : '15,000đ'}
+            : '20,000đ'}
         </div>
       </div>
       <hr />
@@ -62,7 +64,7 @@ export default function OrderSummary() {
         <div style={{ color: 'gray' }}>Total</div>
         <div>
           {numberWithCommas(
-            calculateSubTotal(appContext.store.productListInCart) + 15000
+            calculateSubTotal(appContext.store.productListInCart) + 20000
           )}
           đ
         </div>

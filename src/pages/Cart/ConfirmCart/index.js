@@ -16,6 +16,7 @@ import PaymentMethod from '../../../components/PaymentMethod';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ProductInOrder from '../../../components/ProductInOrder';
 
 const useStyles = makeStyles({
   root: {
@@ -103,6 +104,14 @@ export default function ConfirmCart() {
           appContext.store.deliveryAddressOption === 'address'
             ? appContext.store.customer.address
             : address,
+        phoneNumber:
+          appContext.store.deliveryAddressOption === 'address'
+            ? appContext.store.customer.phoneNumber
+            : phoneNumber,
+        customerName:
+          appContext.store.deliveryAddressOption === 'address'
+            ? appContext.store.customer.customerName
+            : recipientFullName,
         paymentMethod: appContext.store.paymentMethod,
         orderDetails: appContext.store.productListInCart.map((product) => {
           return {
@@ -140,7 +149,7 @@ export default function ConfirmCart() {
           snackbar: {
             open: true,
             severity: 'error',
-            message: err.response.data.Message
+            message: 'Please check your delivery address again!'
           }
         }
       });
@@ -254,7 +263,7 @@ export default function ConfirmCart() {
                   >{`Standard Delivery: ${
                     calculateSubTotal(appContext.store.productListInCart) >= 300000
                       ? 'Free'
-                      : '15,000đ'
+                      : '20,000đ'
                   }`}</Typography>
                 }
               />
@@ -262,6 +271,24 @@ export default function ConfirmCart() {
           </FormControl>
         </div>
         <PaymentMethod />
+        <div className={classes.DIV}>
+          <Typography variant="h6" style={{ fontWeight: 'bolder' }}>
+            Check Your Order Again
+          </Typography>
+          <Divider />
+          {appContext.store.productListInCart.map((product) => {
+            return (
+              <>
+                <ProductInOrder
+                  key={product.productId}
+                  product={product}
+                  number={product.numberInCart}
+                />
+                <Divider />
+              </>
+            );
+          })}
+        </div>
         <Drawer variant="permanent" anchor="bottom">
           <div className={classes.drawerDIV}>
             <div style={{ display: 'flex', justifyContent: 'end' }}>
@@ -272,7 +299,7 @@ export default function ConfirmCart() {
                   textAlign: 'end'
                 }}
               >
-                SubTotal:
+                {`Subtotal (${appContext.store.numberProductsInCart} items):`}
               </Typography>
               <Typography
                 variant="h6"
@@ -283,7 +310,10 @@ export default function ConfirmCart() {
                   textAlign: 'end'
                 }}
               >
-                {numberWithCommas(10000000)}đ
+                {numberWithCommas(
+                  calculateSubTotal(appContext.store.productListInCart)
+                )}
+                đ
               </Typography>
             </div>
             <div style={{ display: 'flex', justifyContent: 'end' }}>
@@ -305,7 +335,9 @@ export default function ConfirmCart() {
                   textAlign: 'end'
                 }}
               >
-                {numberWithCommas(10000000)}đ
+                {calculateSubTotal(appContext.store.productListInCart) >= 300000
+                  ? 'Free'
+                  : '20,000đ'}
               </Typography>
             </div>
             <div style={{ display: 'flex', justifyContent: 'end' }}>
@@ -327,7 +359,13 @@ export default function ConfirmCart() {
                   textAlign: 'end'
                 }}
               >
-                {numberWithCommas(10000000)}đ
+                {numberWithCommas(
+                  calculateSubTotal(appContext.store.productListInCart) +
+                    (calculateSubTotal(appContext.store.productListInCart) >= 300000
+                      ? 0
+                      : 20000)
+                )}
+                đ
               </Typography>
             </div>
             <Divider />

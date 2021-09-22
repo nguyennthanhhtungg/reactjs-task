@@ -35,6 +35,7 @@ import AppContext from '../../contexts/appContext';
 import reducer from './customerReducer';
 import CustomerContext from './customerContext';
 import { axiosInstance } from '../../utils/database';
+import OrderDetail from './Order/orderDetail';
 
 const useTreeItemStyles = makeStyles({
   root: {
